@@ -88,9 +88,9 @@ class VtmGoAuth:
 
     def authorize(self,module):
         if module == 'VTM_GO':
-            self._authorizeVTM()    
+            return self._authorizeVTM()    
         else:
-            self._authorizeRTL()
+            return self._authorizeRTL()
     
     def _authorizeVTM(self):    
         """ Start the authorization flow. """
