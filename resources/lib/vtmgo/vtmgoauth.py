@@ -88,11 +88,11 @@ class VtmGoAuth:
 
     def authorize(self,module):
         if module == 'VTM_GO':
-            authorizeVTM()    
+            self._authorizeVTM()    
         else:
-            authorizeRTL()
+            self._authorizeRTL()
     
-    def authorizeVTM(self):    
+    def _authorizeVTM(self):    
         """ Start the authorization flow. """
         response = util.http_post('https://login2.vtm.be/device/authorize', form={
             'client_id': 'vtm-go-androidtv',
@@ -105,7 +105,7 @@ class VtmGoAuth:
 
         return auth_info
         
-    def authorizeRTL(self):
+    def _authorizeRTL(self):
         response = util.http_post('https://login2.vtm.be/device/authorize', form={
             'client_id': 'vtm-go-androidtv',
         })
