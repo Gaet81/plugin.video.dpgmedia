@@ -29,7 +29,7 @@ def show_module_menu():
 def show_VTM():
     """ Show the profile selection, or go to the main menu. """
     auth = VtmGoAuth(kodiutils.get_tokens_path())
-    if auth.get_tokens():
+    if auth.get_tokens('VTM_GO'):
         show_main_menu()
     else:
         show_login_menu()
@@ -38,7 +38,7 @@ def show_VTM():
 def show_RTL():
     """ Show the profile selection, or go to the main menu. """
     auth = VtmGoAuth(kodiutils.get_tokens_path())
-    if auth.get_tokens():
+    if auth.get_tokens('rtlplay'):
         show_main_menu()
     else:
         show_login_menu()
