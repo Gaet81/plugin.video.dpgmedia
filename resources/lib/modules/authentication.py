@@ -20,9 +20,9 @@ class Authentication:
         """ Initialise object """
         self._auth = VtmGoAuth(kodiutils.get_tokens_path())
 
-    def login(self):
+    def login(self,module):
         """ Start the authorisation flow. """
-        auth_info = self._auth.authorize()
+        auth_info = self._auth.authorize(module)
 
         # Show the authorization message
         progress_dialog = kodiutils.progress(
