@@ -106,10 +106,17 @@ class VtmGoAuth:
         return auth_info
         
     def _authorizeRTL(self):
+        """ Start the authorization flow. """
         response = util.http_post('https://login2.vtm.be/device/authorize', form={
             'client_id': 'vtm-go-androidtv',
         })
-        
+        auth_info = json.loads(response.text)
+        xbmc.log(response.text,xbmc.LOGINFO)
+        # We only need the device_code
+        self._account.device_code = auth_info.get('device_code')
+        self._save_cache()
+
+        return auth_info        
 
     def authorize_check(self):
         """ Check if the authorization has been completed. """
