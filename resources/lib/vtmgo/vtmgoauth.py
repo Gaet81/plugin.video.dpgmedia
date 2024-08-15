@@ -87,7 +87,7 @@ class VtmGoAuth:
         self._save_cache()
 
     def authorize(self,module):
-        if module = 'VTM_GO':
+        if module == 'VTM_GO':
             authorizeVTM()    
         else:
             authorizeRTL()
