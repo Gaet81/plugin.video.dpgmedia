@@ -33,6 +33,8 @@ class Menu:
             title=kodiutils.localize(30024),  # RTL Play
             path=kodiutils.url_for('show_RTL'),
         ))
+
+        kodiutils.show_listing(listing, sort=['unsorted'])
         
     @staticmethod
     def show_mainmenu():
