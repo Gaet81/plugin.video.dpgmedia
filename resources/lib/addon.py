@@ -32,7 +32,7 @@ def show_VTM():
     if auth.get_tokens('VTM_GO'):
         show_main_menu()
     else:
-        show_login_menu()
+        show_login_menu('VTM_GO')
 
 @routing.route('/rtl')
 def show_RTL():
@@ -41,7 +41,7 @@ def show_RTL():
     if auth.get_tokens('rtlplay'):
         show_main_menu()
     else:
-        show_login_menu()
+        show_login_menu('rtlplay')
     
 @routing.route('/menu')
 def show_main_menu():
@@ -51,10 +51,10 @@ def show_main_menu():
 
 
 @routing.route('/auth/login')
-def show_login_menu():
+def show_login_menu(module):
     """ Show the login menu """
     from resources.lib.modules.authentication import Authentication
-    Authentication().login()
+    Authentication().login(module)
 
 
 @routing.route('/auth/clear-tokens')
