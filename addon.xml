@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.vtm.go" name="VTM GO" version="1.4.4" provider-name="Michaël Arnauts">
+<addon id="plugin.video.dpgmedia" name="dpgmedia" version="0.0.1" provider-name="Gaet81">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.dateutil" version="2.6.0"/>
@@ -14,17 +14,20 @@
     </extension>
     <extension point="xbmc.service" library="service_entry.py"/>
     <extension point="xbmc.addon.metadata">
-        <summary lang="en_GB">Access the VTM GO library</summary>
-        <description lang="en_GB">This add-on gives access to all live tv channels and all video-on-demand content available on the VTM GO platform.</description>
-        <disclaimer lang="en_GB">This add-on is not officially commissioned/supported by DPG Media and is provided 'as is' without any warranty of any kind. The VTM GO name, VTM GO logo and channel icons are property of DPG Media and are used according to the fair use policy.</disclaimer>
-        <summary lang="nl_NL">Bekijk VTM GO</summary>
-        <description lang="nl_NL">Deze add-on geeft toegang tot alle live TV kanalen en alle video-on-demand content dat beschikbaar is op het VTM GO platform.</description>
-        <disclaimer lang="nl_NL">Deze add-on wordt niet ondersteund door DPG Media en wordt aangeboden 'as is', zonder enige garantie. De VTM GO naam, VTM GO logo en de kanaallogo's zijn eigendom van DPG Media en worden gebruikt in overeenstemming met de fair use policy.</disclaimer>
+        <summary lang="en_GB">Access the VTM GO and RTL PLay library</summary>
+        <description lang="en_GB">This add-on gives access to all live tv channels and all video-on-demand content available on the VTM GO and RTL Play platform.</description>
+        <disclaimer lang="en_GB">This add-on is not officially commissioned/supported by DPG Media and is provided 'as is' without any warranty of any kind. The VTM GO name, VTM GO logo, RTL Play name, RTL Play logo and channel icons are property of DPG Media and are used according to the fair use policy.</disclaimer>
+        <summary lang="nl_NL">Bekijk VTM GO en RTL Play</summary>
+        <description lang="nl_NL">Deze add-on geeft toegang tot alle live TV kanalen en alle video-on-demand content dat beschikbaar is op het VTM GO en RTL Play platform.</description>
+        <disclaimer lang="nl_NL">Deze add-on wordt niet ondersteund door DPG Media en wordt aangeboden 'as is', zonder enige garantie. De VTM GO naam, VTM GO logo, RTL Play naam, RTL Play logo en de kanaallogo's zijn eigendom van DPG Media en worden gebruikt in overeenstemming met de fair use policy.</disclaimer>
+        <summary lang="fr_FR">Regarder VTM GO et RTL Play</summary>
+        <description lang="fr_FR">Cet add-on donne accès à tous les chaines en direct et à tot eles vidéos à la demande qui qi sont disponible sur les plateformes VTM GO et RTL Play.</description>
+        <disclaimer lang="fr_FR">Cette add-on n'est pas supporté officiellement par DPG Media et est fourni 'as is', sans aucune garantie. Le nom VTM GO, logo VTM GO, nom RTL Play, logo RTL Play et les logos des chaines sont la propriétés de DPG Media et sont utilisés en accord avec la politique d'utilisation loyale.</disclaimer>
         <platform>all</platform>
         <license>GPL-3.0-only</license>
-        <news>v1.4.4 (2024-02-26)
-- Fix API.</news>
-        <source>https://github.com/add-ons/plugin.video.vtm.go</source>
+        <news>v0.0.1 (2024-08-15)
+- Merci au plugin https://github.com/add-ons/plugin.video.vtm.go qui a permis la création de celui-ci</news>
+        <source>https://github.com/Gaet81/plugin.video.dpgmedia</source>
         <assets>
             <icon>resources/icon.png</icon>
             <fanart>resources/fanart.png</fanart>
@@ -35,3 +38,4 @@
         <reuselanguageinvoker>true</reuselanguageinvoker>
     </extension>
 </addon>
+
