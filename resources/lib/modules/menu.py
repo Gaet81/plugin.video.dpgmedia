@@ -18,6 +18,22 @@ class Menu:
     def __init__(self):
         """ Initialise object """
 
+    
+    @staticmethod
+    def show_modulemenu():
+        """ Show the module menu """
+        listing = []
+
+        listing.append(kodiutils.TitleItem(
+            title=kodiutils.localize(30023),  # VTM
+            path=kodiutils.url_for('show_VTM'),
+        ))
+
+        listing.append(kodiutils.TitleItem(
+            title=kodiutils.localize(30024),  # RTL Play
+            path=kodiutils.url_for('show_RTL'),
+        ))
+        
     @staticmethod
     def show_mainmenu():
         """ Show the main menu """
