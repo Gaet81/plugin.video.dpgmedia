@@ -21,6 +21,8 @@ except ImportError:  # Python 2
 
 _LOGGER = logging.getLogger(__name__)
 
+REFRESH_TOKEN_URL = 'https://lfvp-api.dpgmedia.net/%s/tokens/refresh'
+
 
 class AccountStorage:
     """ Data storage for account info """
@@ -131,7 +133,7 @@ class VtmGoAuth:
 
         return True
 
-    def get_tokens(self):
+    def get_tokens(self,module):
         """ Check if we have a token based on our device code. """
         # If we have no access_token, return None
         if not self._account.access_token:
@@ -142,7 +144,7 @@ class VtmGoAuth:
             return self._account
 
         # We can refresh our old token so it's valid again
-        response = util.http_post('https://lfvp-api.dpgmedia.net/VTM_GO/tokens/refresh', data={
+        response = util.http_post(REFRESH_TOKEN_URL % module, data={
             'lfvpToken': self._account.access_token,
         })
 
