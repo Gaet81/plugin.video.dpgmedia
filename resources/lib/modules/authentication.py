@@ -12,7 +12,6 @@ from resources.lib.vtmgo.vtmgoauth import VtmGoAuth
 
 _LOGGER = logging.getLogger(__name__)
 
-
 class Authentication:
     """ Code responsible for the Authentication """
 
@@ -21,6 +20,12 @@ class Authentication:
         self._auth = VtmGoAuth(kodiutils.get_tokens_path())
 
     def login(self,module):
+        if module == 'VTM-GO':
+            self._loginVTM(module)
+        else:
+            self._loginRTL(module)
+    
+    def _loginVTM(self,module):        
         """ Start the authorisation flow. """
         auth_info = self._auth.authorize(module)
 
@@ -46,7 +51,7 @@ class Authentication:
                 return
 
             # Check if we are authorized now
-            check = self._auth.authorize_check()
+            check = self._auth.authorize_check(module)
             if check:
                 progress_dialog.close()
                 kodiutils.notification(kodiutils.localize(30702))
@@ -58,6 +63,18 @@ class Authentication:
 
         # Close progress indicator
         progress_dialog.close()
+
+        kodiutils.ok_dialog(message=kodiutils.localize(30703))
+
+    def _loginRTL(self,module):
+        auth_info = self._auth.authorize(module)
+        
+        # Check if we are authorized now
+        check = self._auth.authorize_check(module)
+        if check:
+            kodiutils.notification(kodiutils.localize(30702))
+            kodiutils.redirect(kodiutils.url_for('show_main_menu'))
+            return
 
         kodiutils.ok_dialog(message=kodiutils.localize(30703))
 
