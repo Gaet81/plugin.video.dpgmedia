@@ -17,12 +17,20 @@ _LOGGER = logging.getLogger(__name__)
 
 @routing.route('/')
 def index():
+    show_module_menu()
     """ Show the profile selection, or go to the main menu. """
     auth = VtmGoAuth(kodiutils.get_tokens_path())
+    authRTL = VtmGoAuth(kodiutils.get_tokens_path())
     if auth.get_tokens():
         show_main_menu()
     else:
         show_login_menu()
+        
+@routing.route('/module')
+def show_module_menu():
+    """ Show the module menu """
+    from resources.lib.modules.menu import Menu
+    Menu().show_modulemenu()
 
 
 @routing.route('/menu')
