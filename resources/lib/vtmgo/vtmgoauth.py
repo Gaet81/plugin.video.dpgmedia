@@ -7,6 +7,7 @@ import json
 import logging
 import os
 import uuid
+import xbmc
 
 from requests import HTTPError
 
@@ -85,18 +86,30 @@ class VtmGoAuth:
         self._account.access_token = access_token
         self._save_cache()
 
-    def authorize(self):
+    def authorize(self,module):
+        if module = 'VTM_GO':
+            authorizeVTM()    
+        else:
+            authorizeRTL()
+    
+    def authorizeVTM(self):    
         """ Start the authorization flow. """
         response = util.http_post('https://login2.vtm.be/device/authorize', form={
             'client_id': 'vtm-go-androidtv',
         })
         auth_info = json.loads(response.text)
-
+        xbmc.log(response.text,xbmc.LOGINFO)
         # We only need the device_code
         self._account.device_code = auth_info.get('device_code')
         self._save_cache()
 
         return auth_info
+        
+    def authorizeRTL(self):
+        response = util.http_post('https://login2.vtm.be/device/authorize', form={
+            'client_id': 'vtm-go-androidtv',
+        })
+        
 
     def authorize_check(self):
         """ Check if the authorization has been completed. """
