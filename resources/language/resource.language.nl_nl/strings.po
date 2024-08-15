@@ -76,6 +76,14 @@ msgctxt "#30022"
 msgid "Show the VTM GO recommendations for Kids"
 msgstr "Bekijk de VTM GO aanbevelingen voor kinderen"
 
+msgctxt "#30023"
+msgid "VTM GO"
+msgstr ""
+
+msgctxt "#30024"
+msgid "RTL Play"
+msgstr ""
+
 # SUBMENUS
 msgctxt "#30052"
 msgid "Watch live [B]{channel}[/B]"
