@@ -157,6 +157,7 @@ class VtmGoAuth:
             "referrer": "https://cdns.eu1.gigya.com/"
         }
         api_key = self._get_api_key()
+        xbmc.log(api_key,xbmc.LOGINFO)
         payload = {
             "loginID": login,
             "password": password,
@@ -164,7 +165,7 @@ class VtmGoAuth:
             "lang": "fr",
             "format": "json"
         }
-    
+        
         resp2 = util.http_post(URL_COMPTE_LOGIN, data=payload, headers=headers)
         xbmc.log(resp2.text,xbmc.LOGINFO)
         auth_info = json.loads(resp2.text)
