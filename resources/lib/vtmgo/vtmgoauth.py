@@ -24,7 +24,7 @@ _LOGGER = logging.getLogger(__name__)
 
 REFRESH_TOKEN_URL = 'https://lfvp-api.dpgmedia.net/%s/tokens/refresh'
 
-//login gigya RTL TVI
+#login gigya RTL TVI
 PUBLIC_SITE = 'https://www.rtlplay.be'
 URL_GET_JS_ID_API_KEY = PUBLIC_SITE + '/connexion'
 GENERIC_HEADERS = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/117.0"}
