@@ -20,7 +20,7 @@ class Authentication:
         self._auth = VtmGoAuth(kodiutils.get_tokens_path())
 
     def login(self,module):
-        if module == 'VTM-GO':
+        if module == 'VTM_GO':
             self._loginVTM(module)
         else:
             self._loginRTL(module)
