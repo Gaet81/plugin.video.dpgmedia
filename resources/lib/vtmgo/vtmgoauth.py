@@ -167,7 +167,7 @@ class VtmGoAuth:
         return True, json_parser["UID"], json_parser["UIDSignature"], json_parser["signatureTimestamp"]"""
 
         """ Start the authorization flow. """
-        response = util.http_post('https://sso.rtl.be/device/authorize', form={
+        response = util.http_get('https://sso.rtl.be/device/authorize', form={
             'client_id': 'rtlplay-androidtv',
         })
         auth_info = json.loads(response.text)
