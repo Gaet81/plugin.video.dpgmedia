@@ -175,8 +175,8 @@ class VtmGoAuth:
             "referrer": "https://cdns.eu1.gigya.com/"
         }
         response = util.http_get('https://sso.rtl.be/device/authorize', headers=headers)
-        auth_info = json.loads(response.text)
         xbmc.log(response.text,xbmc.LOGINFO)
+        auth_info = json.loads(response.text)
         # We only need the device_code
         self._account.device_code = auth_info.get('device_code')
         self._save_cache()
