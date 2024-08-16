@@ -24,6 +24,15 @@ _LOGGER = logging.getLogger(__name__)
 
 REFRESH_TOKEN_URL = 'https://lfvp-api.dpgmedia.net/%s/tokens/refresh'
 
+//login gigya RTL TVI
+PUBLIC_SITE = 'https://www.rtlplay.be'
+URL_GET_JS_ID_API_KEY = PUBLIC_SITE + '/connexion'
+GENERIC_HEADERS = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/117.0"}
+PATTERN_JS_ID = re.compile(r'main-(.*?)\.bundle\.js')
+API_KEY = "3_LGnnaXIFQ_VRXofTaFTGnc6q7pM923yFB0AXSWdxADsUT0y2dVdDKmPRyQMj7LMc"
+URL_API_KEY = PUBLIC_SITE + '/main-%s.bundle.js'
+PATTERN_API_KEY = re.compile(r'login.rtl.be\",key:\"(.*?)\"')
+URL_COMPTE_LOGIN = 'https://accounts.eu1.gigya.com/accounts.login'
 
 class AccountStorage:
     """ Data storage for account info """
@@ -104,11 +113,59 @@ class VtmGoAuth:
         self._save_cache()
 
         return auth_info
-        
+
+    def get_api_key():
+        resp_js_id = urlquick.get(URL_GET_JS_ID_API_KEY, headers=GENERIC_HEADERS)
+        found_js_id = PATTERN_JS_ID.findall(resp_js_id.text)
+        if len(found_js_id) == 0:
+            return API_KEY
+        js_id = found_js_id[0]
+        resp = urlquick.get(URL_API_KEY % js_id, headers=GENERIC_HEADERS)
+        # Hack to force encoding of the response
+        resp.encoding = 'utf-8'
+        found_items = PATTERN_API_KEY.findall(resp.text)
+        if len(found_items) == 0:
+            return API_KEY
+        return found_items[0]
+
     def _authorizeRTL(self):
+        """
+        login = plugin.setting.get_string('rtlplaybe.login')
+        password = plugin.setting.get_string('rtlplaybe.password')
+        if logi"Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/117.0"n == '' or password == '':
+            xbmcgui.Dialog().ok(
+                plugin.localize(30600),
+                plugin.localize(30604) % ('RTLPlay (BE)', ('%s' % PUBLIC_SITE)))
+            return False, None, None, None
+
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/117.0",
+            "Accept": "*/*",
+            "Accept-Language": "fr-BE,en-US;q=0.7,en;q=0.3",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "referrer": "https://cdns.eu1.gigya.com/"
+        }
+    
+        payload = {
+            "loginID": login,
+            "password": password,
+            "apiKey": api_key,
+            "lang": "fr",
+            "format": "json"
+        }
+    
+        resp2 = util.http_post(URL_COMPTE_LOGIN, data=payload, headers=headers)
+        json_parser = resp2.json()
+        xbmc.log(resp2.text,xbmc.LOGINFO)
+        if "UID" not in json_parser:
+            plugin.notify('ERROR', 'RTLPlay (BE) : ' + plugin.localize(30711))
+            return False, None, None, None
+    
+        return True, json_parser["UID"], json_parser["UIDSignature"], json_parser["signatureTimestamp"]"""
+
         """ Start the authorization flow. """
-        response = util.http_post('https://login2.vtm.be/device/authorize', form={
-            'client_id': 'vtm-go-androidtv',
+        response = util.http_post('https://sso.rtl.be/device/authorize', form={
+            'client_id': 'rtlplay-androidtv',
         })
         auth_info = json.loads(response.text)
         xbmc.log(response.text,xbmc.LOGINFO)
