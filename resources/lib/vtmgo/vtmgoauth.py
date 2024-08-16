@@ -123,7 +123,7 @@ class VtmGoAuth:
         return auth_info
         
     #login RTLplay
-    def _get_api_key():
+    def _get_api_key(self):
         resp_js_id = util.http_get(URL_GET_JS_ID_API_KEY, headers=GENERIC_HEADERS)
         found_js_id = PATTERN_JS_ID.findall(resp_js_id.text)
         if len(found_js_id) == 0:
