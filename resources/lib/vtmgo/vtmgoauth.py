@@ -167,9 +167,14 @@ class VtmGoAuth:
         return True, json_parser["UID"], json_parser["UIDSignature"], json_parser["signatureTimestamp"]"""
 
         """ Start the authorization flow. """
-        response = util.http_get('https://sso.rtl.be/device/authorize', form={
-            'client_id': 'rtlplay-androidtv',
-        })
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/117.0",
+            "Accept": "*/*",
+            "Accept-Language": "fr-BE,en-US;q=0.7,en;q=0.3",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "referrer": "https://cdns.eu1.gigya.com/"
+        }
+        response = util.http_get('https://sso.rtl.be/device/authorize', headers=headers)
         auth_info = json.loads(response.text)
         xbmc.log(response.text,xbmc.LOGINFO)
         # We only need the device_code
