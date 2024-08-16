@@ -128,6 +128,7 @@ class VtmGoAuth:
         xbmc.log(resp_js_id.text,xbmc.LOGINFO)
         found_js_id = PATTERN_JS_ID.findall(resp_js_id.text)
         if len(found_js_id) == 0:
+            xbmc.log("found_js_id est vide, prend l'api par défaut. càd "+API_KEY,xbmc.LOGINFO)
             return API_KEY
         js_id = found_js_id[0]
         resp = util.http_get(URL_API_KEY % js_id, headers=GENERIC_HEADERS)
