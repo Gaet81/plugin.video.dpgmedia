@@ -5,10 +5,10 @@
         <setting label="30823" type="bool" id="interface_show_mylist" default="true"/>
         <setting label="30826" type="bool" id="interface_show_continuewatching" default="false" visible="false"/>
     </category>
-    <category label="30004"> <!-- Accounts -->
-        <setting label="30081" type="lsep" subsetting="true" visible="eq(1,true)"/>
-            <setting label="30246" type="text" id="rtlplaybe.login" default=""/>
-            <setting label="30247" type="text" id="rtlplaybe.password" option="hidden" default=""/>
+    <category label="30834"> <!-- Accounts -->
+        <setting label="30835" type="lsep" subsetting="true" visible="eq(1,true)"/>
+            <setting label="30836" type="text" id="rtlplaybe.login" default=""/>
+            <setting label="30837" type="text" id="rtlplaybe.password" option="hidden" default=""/>
     </category>    
     <category label="30840"> <!-- Playback -->
         <setting label="30841" type="lsep"/> <!-- Subtitles -->
