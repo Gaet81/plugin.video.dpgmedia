@@ -161,7 +161,7 @@ class VtmGoAuth:
         payload = {
             "loginID": login,
             "password": password,
-            "apiKey": api_key,
+            "ApiKey": api_key,
             "lang": "fr",
             "format": "json"
         }
