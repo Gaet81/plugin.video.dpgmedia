@@ -28,13 +28,7 @@ _LOGGER = logging.getLogger(__name__)
 REFRESH_TOKEN_URL = 'https://lfvp-api.dpgmedia.net/%s/tokens/refresh'
 
 #login gigya RTL
-PUBLIC_SITE = 'https://www.rtlplay.be'
-URL_GET_JS_ID_API_KEY = PUBLIC_SITE + '/connexion'
-GENERIC_HEADERS = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/117.0"}
-PATTERN_JS_ID = re.compile(r'main-(.*?)\.bundle\.js')
 API_KEY = "3_LGnnaXIFQ_VRXofTaFTGnc6q7pM923yFB0AXSWdxADsUT0y2dVdDKmPRyQMj7LMc"
-URL_API_KEY = PUBLIC_SITE + '/main-%s.bundle.js'
-PATTERN_API_KEY = re.compile(r'login.rtl.be\",key:\"(.*?)\"')
 URL_COMPTE_LOGIN = 'https://accounts.eu1.gigya.com/accounts.login'
 
 class AccountStorage:
@@ -122,24 +116,6 @@ class VtmGoAuth:
 
         return auth_info
         
-    #login RTLplay
-    def _get_api_key(self):
-        resp_js_id = util.http_get(URL_GET_JS_ID_API_KEY, headers=GENERIC_HEADERS)
-        xbmc.log(resp_js_id.text,xbmc.LOGINFO)
-        found_js_id = PATTERN_JS_ID.findall(resp_js_id.text)
-        if len(found_js_id) == 0:
-            xbmc.log("found_js_id est vide, prend l'api par défaut. càd "+API_KEY,xbmc.LOGINFO)
-            return API_KEY
-        js_id = found_js_id[0]
-        resp = util.http_get(URL_API_KEY % js_id, headers=GENERIC_HEADERS)
-        xbmc.log(resp.text,xbmc.LOGINFO)
-        # Hack to force encoding of the response
-        resp.encoding = 'utf-8'
-        found_items = PATTERN_API_KEY.findall(resp.text)
-        if len(found_items) == 0:
-            return API_KEY
-        return found_items[0]
-
     def _authorizeRTL(self):
         login = kodiutils.get_setting('rtlplaybe.login')
         password = kodiutils.get_setting('rtlplaybe.password')
@@ -156,12 +132,11 @@ class VtmGoAuth:
             "Content-Type": "application/x-www-form-urlencoded",
             "referrer": "https://cdns.eu1.gigya.com/"
         }
-        api_key = self._get_api_key()
-        xbmc.log(api_key,xbmc.LOGINFO)
+        
         payload = {
             "loginID": login,
             "password": password,
-            "ApiKey": api_key,
+            "ApiKey": API_KEY,
             "lang": "fr",
             "format": "json"
         }
@@ -175,21 +150,10 @@ class VtmGoAuth:
     
         self._account.id_token = auth_info.get('UID')
         self._account.UIDSignature = auth_info.get('UIDSignature')
+        self._account.access_token = auth_info.get('UIDSignature')       
         self._account.signatureTimestamp = auth_info.get('signatureTimestamp')
-        
-
-        # Fetch an actual token we can use
-        response = util.http_post('https://lfvp-api.dpgmedia.net/rtlplay/tokens', data={
-            'device': {
-                'id': str(uuid.uuid4()),
-                'name': 'dpgmedia Addon on Kodi',
-            },
-            'idToken': self._account.id_token,
-        })
-        xbmc.log(response.text,xbmc.LOGINFO)
-        self._account.access_token = json.loads(response.text).get('lfvpToken')
-        self._save_cache()        
-
+        self._save_cache() 
+                  
         return auth_info
 
     def authorize_check(self):
