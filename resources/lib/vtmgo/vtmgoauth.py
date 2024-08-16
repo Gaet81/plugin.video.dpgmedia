@@ -13,7 +13,7 @@ import xbmc
 import re
 
 from requests import HTTPError
-
+from resources.lib import kodiutils
 from resources.lib.vtmgo import API_ENDPOINT, Profile, util
 from resources.lib.vtmgo.exceptions import NoLoginException
 
