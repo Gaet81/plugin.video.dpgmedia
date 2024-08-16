@@ -70,7 +70,7 @@ class Authentication:
         auth_info = self._auth.authorize(module)
         
         # Check if we are authorized now
-        check = self._auth.authorize_check(module)
+        check = auth_info.get('login_ok')
         if check:
             kodiutils.notification(kodiutils.localize(30702))
             kodiutils.redirect(kodiutils.url_for('show_main_menu'))
