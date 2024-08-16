@@ -152,6 +152,7 @@ class VtmGoAuth:
         self._account.UIDSignature = auth_info.get('UIDSignature')
         self._account.access_token = auth_info.get('UIDSignature')       
         self._account.signatureTimestamp = auth_info.get('signatureTimestamp')
+        self._account.login_ok = True
         self._save_cache() 
                   
         return auth_info
