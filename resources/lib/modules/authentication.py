@@ -51,7 +51,7 @@ class Authentication:
                 return
 
             # Check if we are authorized now
-            check = self._auth.authorize_check(module)
+            check = self._auth.authorize_check()
             if check:
                 progress_dialog.close()
                 kodiutils.notification(kodiutils.localize(30702))
