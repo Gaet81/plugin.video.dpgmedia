@@ -141,8 +141,8 @@ class VtmGoAuth:
         password = kodiutils.get_setting('rtlplaybe.password')
         if login == '' or password == '':
             kodiutils.notification(
-                kodiutils.localize(30600),
-                kodiutils.localize(30604) % ('RTLPlay (BE)', ('%s' % PUBLIC_SITE)))
+                kodiutils.localize(30751),
+                kodiutils.localize(30752) % ('RTLPlay (BE)', ('%s' % PUBLIC_SITE)))
             return
         
         headers = {
@@ -165,7 +165,7 @@ class VtmGoAuth:
         xbmc.log(resp2.text,xbmc.LOGINFO)
         auth_info = json.loads(resp2.text)
         if "UID" not in auth_info:
-            kodiutils.notification('ERROR', 'RTLPlay (BE) : ' + kodiutils.localize(30711))
+            kodiutils.notification('ERROR', 'RTLPlay (BE) : ' + kodiutils.localize(30753))
             return
     
         self._account.id_token = auth_info.get('UID')
