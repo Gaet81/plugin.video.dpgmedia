@@ -125,11 +125,13 @@ class VtmGoAuth:
     #login RTLplay
     def _get_api_key(self):
         resp_js_id = util.http_get(URL_GET_JS_ID_API_KEY, headers=GENERIC_HEADERS)
+        xbmc.log(resp_js_id.text,xbmc.LOGINFO)
         found_js_id = PATTERN_JS_ID.findall(resp_js_id.text)
         if len(found_js_id) == 0:
             return API_KEY
         js_id = found_js_id[0]
         resp = util.http_get(URL_API_KEY % js_id, headers=GENERIC_HEADERS)
+        xbmc.log(resp.text,xbmc.LOGINFO)
         # Hack to force encoding of the response
         resp.encoding = 'utf-8'
         found_items = PATTERN_API_KEY.findall(resp.text)
