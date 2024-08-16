@@ -236,6 +236,18 @@ msgctxt "#30717"
 msgid "This program is not available in the VTM GO catalogue."
 msgstr ""
 
+msgctxt "#30751"
+msgid "Information"
+msgstr ""
+
+msgctxt "#30752"
+msgid "Access to this content requires an account %s. You can provide your credentials for it in the settings of this add-on. If you don't have an account, you can create one at this url %s."
+msgstr ""
+
+msgctxt "#30753"
+msgid "Authentication failed"
+msgstr ""
+
 # SETTINGS
 msgctxt "#30820"
 msgid "Interface"
@@ -251,6 +263,22 @@ msgstr ""
 
 msgctxt "#30826"
 msgid "Show Continue watching"
+msgstr ""
+
+msgctxt "#30834"
+msgid "Accounts"
+msgstr ""
+
+msgctxt "#30835"
+msgid "Belgian channels"
+msgstr ""
+
+msgctxt "#30836"
+msgid "RTLplay Login"
+msgstr ""
+
+msgctxt "#30837"
+msgid "RTLplay Password"
 msgstr ""
 
 msgctxt "#30840"
