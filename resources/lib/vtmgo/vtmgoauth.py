@@ -161,7 +161,7 @@ class VtmGoAuth:
         self._account.cookie_value = auth_info.get('cookieValue')    
         self._account.login_ok = True
         self._save_cache()
-        resp3 = util.http_get("https://www.rtlplay.be/rtlplay/connexion", headers = headers)
+        resp3 = util.http_get("https://www.rtlplay.be/rtlplay", headers = headers)
         xbmc.log(resp3.text,xbmc.LOGINFO)
         xbmc.log(str(resp3.headers),xbmc.LOGINFO)
         xbmc.log(str(resp3.cookies),xbmc.LOGINFO)
