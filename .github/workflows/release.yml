@@ -5,7 +5,7 @@ on:
       - 'v*'
 jobs:
   build:
-    name: Release plugin.video.vtm.go
+    name: Release plugin.video.dpgmedia
     runs-on: ubuntu-latest
     steps:
       - name: Check out ${{ github.sha }} from repository ${{ github.repository }}
