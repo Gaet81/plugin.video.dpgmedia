@@ -145,7 +145,7 @@ class VtmGoAuth:
         
         resp2 = util.http_post(URL_COMPTE_LOGIN, form=payload, headers=headers)
         xbmc.log(resp2.text,xbmc.LOGINFO)
-        xbmc.log(resp2.headers.text,xbmc.LOGINFO)
+        xbmc.log(resp2.headers,xbmc.LOGINFO)
         xbmc.log(resp2.cookies,xbmc.LOGINFO)
         auth_info = json.loads(resp2.text)
         if "UID" not in auth_info:
@@ -162,7 +162,7 @@ class VtmGoAuth:
         self._account.login_ok = True
         self._save_cache()
         resp3 = util.http_get("https://www.rtlplay.be/rtlplay/connexion", headers = headers)
-        xbmc.log(resp2.headers['location'],xbmc.LOGINFO)
+        xbmc.log(resp3.headers['location'],xbmc.LOGINFO)
                   
         return auth_info
 
