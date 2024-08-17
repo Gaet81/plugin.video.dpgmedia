@@ -24,7 +24,7 @@ check-translations:
 check-addon: build
 	@printf ">>> Running addon checks\n"
 	$(eval TMPDIR := $(shell mktemp -d))
-	@unzip dist/plugin.video.vtm.go-*+matrix.1.zip -d ${TMPDIR}
+	@unzip dist/plugin.video.dpgmedia-*+matrix.1.zip -d ${TMPDIR}
 	cd ${TMPDIR} && kodi-addon-checker --branch=matrix
 	@rm -rf ${TMPDIR}
 
@@ -41,7 +41,7 @@ clean:
 	@find . -name '__pycache__' -type d -delete
 	@rm -rf .pytest_cache/ tests/cdm tests/userdata/temp
 	@rm -f *.log .coverage
-	@rm -rf dist/plugin.video.vtm.go*
+	@rm -rf dist/plugin.video.dpgmedia*
 
 build: clean
 	@printf ">>> Building add-on\n"
@@ -50,7 +50,7 @@ build: clean
 
 release:
 ifneq ($(release),)
-	docker run -it --rm --env CHANGELOG_GITHUB_TOKEN=$(GH_TOKEN) -v "$(shell pwd)":/usr/local/src/your-app githubchangeloggenerator/github-changelog-generator -u add-ons -p plugin.video.vtm.go --no-issues --exclude-labels duplicate,question,invalid,wontfix,release,testing --future-release v$(release)
+	docker run -it --rm --env CHANGELOG_GITHUB_TOKEN=$(GH_TOKEN) -v "$(shell pwd)":/usr/local/src/your-app githubchangeloggenerator/github-changelog-generator -u add-ons -p plugin.video.dpgmedia --no-issues --exclude-labels duplicate,question,invalid,wontfix,release,testing --future-release v$(release)
 
 	@printf "cd /addon/@version\nset $$release\nsave\nbye\n" | xmllint --shell addon.xml; \
 	date=$(shell date '+%Y-%m-%d'); \
