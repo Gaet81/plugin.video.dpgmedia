@@ -162,7 +162,10 @@ class VtmGoAuth:
         self._account.login_ok = True
         self._save_cache()
         resp3 = util.http_get("https://www.rtlplay.be/rtlplay/connexion", headers = headers)
-        xbmc.log(resp3.headers['location'],xbmc.LOGINFO)
+        xbmc.log(resp3.text,xbmc.LOGINFO)
+        xbmc.log(str(resp3.headers),xbmc.LOGINFO)
+        xbmc.log(str(resp3.cookeis),xbmc.LOGINFO)
+            
                   
         return auth_info
 
