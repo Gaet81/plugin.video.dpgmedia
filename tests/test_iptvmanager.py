@@ -21,7 +21,7 @@ class TestIptvManager(unittest.TestCase):
 
         # Make request through routing
         from resources.lib.addon import routing
-        routing.run(['plugin://plugin.video.vtm.go/iptv/channels', 0, 'port=' + str(sock.getsockname()[1])])
+        routing.run(['plugin://plugin.video.dpgmedia/iptv/channels', 0, 'port=' + str(sock.getsockname()[1])])
 
         # Wait for data (implementation from IPTV Manager)
         data = self._wait_for_data(sock)
@@ -39,7 +39,7 @@ class TestIptvManager(unittest.TestCase):
 
         # Make request through routing
         from resources.lib.addon import routing
-        routing.run(['plugin://plugin.video.vtm.go/iptv/epg', 0, 'port=' + str(sock.getsockname()[1])])
+        routing.run(['plugin://plugin.video.dpgmedia/iptv/epg', 0, 'port=' + str(sock.getsockname()[1])])
 
         # Wait for data (implementation from IPTV Manager)
         data = self._wait_for_data(sock)
