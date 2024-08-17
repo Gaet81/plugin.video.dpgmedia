@@ -145,7 +145,7 @@ class VtmGoAuth:
         
         resp2 = util.http_post(URL_COMPTE_LOGIN, form=payload, headers=headers)
         xbmc.log(resp2.text,xbmc.LOGINFO)
-        xbmc.log(resp2.headers,xbmc.LOGINFO)
+        xbmc.log(str(resp2.headers),xbmc.LOGINFO)
         xbmc.log(resp2.cookies,xbmc.LOGINFO)
         auth_info = json.loads(resp2.text)
         if "UID" not in auth_info:
