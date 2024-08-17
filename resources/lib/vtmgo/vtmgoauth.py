@@ -109,7 +109,6 @@ class VtmGoAuth:
             'client_id': 'vtm-go-androidtv',
         })
         auth_info = json.loads(response.text)
-        xbmc.log(response.text,xbmc.LOGINFO)
         # We only need the device_code
         self._account.device_code = auth_info.get('device_code')
         self._save_cache()
@@ -203,6 +202,7 @@ class VtmGoAuth:
             return self._account
 
         # We can refresh our old token so it's valid again
+        if self._account.module == 'VTM_GO'
         response = util.http_post(REFRESH_TOKEN_URL % module, data={
             'lfvpToken': self._account.access_token,
         })
