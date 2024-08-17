@@ -41,8 +41,11 @@ class AccountStorage:
     product = ''
     #login RTL
     login_ok = False
+    UID = ''
     UIDSignature = ''
     signatureTimestamp = ''
+    cookie_name = ''
+    cookie_value = ''
     
     
     def is_valid_token(self):
@@ -142,19 +145,24 @@ class VtmGoAuth:
         
         resp2 = util.http_post(URL_COMPTE_LOGIN, form=payload, headers=headers)
         xbmc.log(resp2.text,xbmc.LOGINFO)
-        xbmc.log(resp2.headers,xbmc.LOGINFO)
+        xbmc.log(resp2.headers.text,xbmc.LOGINFO)
         xbmc.log(resp2.cookies,xbmc.LOGINFO)
         auth_info = json.loads(resp2.text)
         if "UID" not in auth_info:
             kodiutils.notification('ERROR', 'RTLPlay (BE) : ' + kodiutils.localize(30753))
             return
     
-        self._account.id_token = auth_info.get('UID')
+        self._account.UID = auth_info.get('UID')
+        #self._account.id_token = auth_info.get('UID')
         self._account.UIDSignature = auth_info.get('UIDSignature')
-        self._account.access_token = auth_info.get('UIDSignature')       
+        #self._account.access_token = auth_info.get('UIDSignature')       
         self._account.signatureTimestamp = auth_info.get('signatureTimestamp')
+        self._account.cookie_name = auth_info.get('cookieName')
+        self._account.cookie_value = auth_info.get('cookieValue')    
         self._account.login_ok = True
-        self._save_cache() 
+        self._save_cache()
+        resp3 = util.http_get("https://www.rtlplay.be/rtlplay/connexion", headers = headers)
+        xbmc.log(resp2.headers['location'],xbmc.LOGINFO)
                   
         return auth_info
 
@@ -204,7 +212,6 @@ class VtmGoAuth:
             return self._account
 
         # We can refresh our old token so it's valid again
-        if self._account.module == 'VTM_GO'
         response = util.http_post(REFRESH_TOKEN_URL % module, data={
             'lfvpToken': self._account.access_token,
         })
