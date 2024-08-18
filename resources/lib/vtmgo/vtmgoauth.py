@@ -27,9 +27,6 @@ _LOGGER = logging.getLogger(__name__)
 
 REFRESH_TOKEN_URL = 'https://lfvp-api.dpgmedia.net/%s/tokens/refresh'
 
-#login gigya RTL
-API_KEY = "3_LGnnaXIFQ_VRXofTaFTGnc6q7pM923yFB0AXSWdxADsUT0y2dVdDKmPRyQMj7LMc"
-URL_COMPTE_LOGIN = 'https://accounts.eu1.gigya.com/accounts.login'
 
 class AccountStorage:
     """ Data storage for account info """
@@ -134,7 +131,7 @@ class VtmGoAuth:
             "Content-Type": "application/x-www-form-urlencoded",
             "referrer": "https://cdns.eu1.gigya.com/"
         }
-        
+        API_KEY = "3_LGnnaXIFQ_VRXofTaFTGnc6q7pM923yFB0AXSWdxADsUT0y2dVdDKmPRyQMj7LMc"
         payload = {
             "loginID": login,
             "password": password,
@@ -143,29 +140,50 @@ class VtmGoAuth:
             "format": "json"
         }
         
+        #login gigya RTL
+        
+        URL_COMPTE_LOGIN = 'https://accounts.eu1.gigya.com/accounts.login'
         resp2 = util.http_post(URL_COMPTE_LOGIN, form=payload, headers=headers)
         xbmc.log(resp2.text,xbmc.LOGINFO)
         xbmc.log(str(resp2.headers),xbmc.LOGINFO)
         xbmc.log(str(resp2.cookies),xbmc.LOGINFO)
-        auth_info = json.loads(resp2.text)
+        info = json.loads(resp2.text)
         if "UID" not in auth_info:
             kodiutils.notification('ERROR', 'RTLPlay (BE) : ' + kodiutils.localize(30753))
             return
     
-        self._account.UID = auth_info.get('UID')
-        #self._account.id_token = auth_info.get('UID')
-        self._account.UIDSignature = auth_info.get('UIDSignature')
-        #self._account.access_token = auth_info.get('UIDSignature')       
-        self._account.signatureTimestamp = auth_info.get('signatureTimestamp')
-        self._account.cookie_name = auth_info.get('cookieName')
-        self._account.cookie_value = auth_info.get('cookieValue')    
+        self._account.UID = info.get('UID')
+        self._account.UIDSignature = info.get('UIDSignature')
+        self._account.signatureTimestamp = info.get('signatureTimestamp')
+        self._account.cookie_name = info.get('cookieName')
+        self._account.cookie_value = info.get('cookieValue')    
         self._account.login_ok = True
-        self._save_cache()
-        resp3 = util.http_get("https://www.rtlplay.be/rtlplay", headers = headers)
+        
+        headersRTL = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/117.0",
+            "Accept": "*/*",
+            "Accept-Language": "fr-BE,en-US;q=0.7,en;q=0.3",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "referrer": "https://sso.rtl.be/"
+        }
+        
+        payload = {
+            "loginID": login,
+            "password": password,
+            "lang": "fr",
+            "format": "json"
+        }
+        URL_RTL_LOGIN = 'https://sso.rtl.be/api/account/login'
+        resp3 = util.http_post(URL_RTL_LOGIN, form=payload, headers=headers)
         xbmc.log(resp3.text,xbmc.LOGINFO)
         xbmc.log(str(resp3.headers),xbmc.LOGINFO)
         xbmc.log(str(resp3.cookies),xbmc.LOGINFO)
-        xbmc.log(str(resp3.history),xbmc.LOGINFO)    
+        xbmc.log(str(resp3.history),xbmc.LOGINFO)
+        auth_info = json.loads(resp3.text)
+        self._account.id_token = auth_info.get('UID')
+        self._account.access_token = auth_info.get('UIDSignature')
+        self._save_cache()
+          
                   
         return auth_info
 
