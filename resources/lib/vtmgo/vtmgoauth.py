@@ -164,11 +164,10 @@ class VtmGoAuth:
             "Accept": "*/*",
             "Accept-Language": "fr-BE,en-US;q=0.7,en;q=0.3",
             "Content-Type": "application/json",
-            "referrer": "https://sso.rtl.be/"
         }
         
         payloadRTL = {
-            "loginID": login,
+            "username": login,
             "password": password,
             "lang": "fr",
             "format": "json"
