@@ -148,7 +148,7 @@ class VtmGoAuth:
         xbmc.log(str(resp2.headers),xbmc.LOGINFO)
         xbmc.log(str(resp2.cookies),xbmc.LOGINFO)
         info = json.loads(resp2.text)
-        if "UID" not in auth_info:
+        if "UID" not in info:
             kodiutils.notification('ERROR', 'RTLPlay (BE) : ' + kodiutils.localize(30753))
             return
     
