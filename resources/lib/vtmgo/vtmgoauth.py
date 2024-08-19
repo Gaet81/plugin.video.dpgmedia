@@ -163,7 +163,7 @@ class VtmGoAuth:
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/117.0",
             "Accept": "*/*",
             "Accept-Language": "fr-BE,en-US;q=0.7,en;q=0.3",
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/json",
             "referrer": "https://sso.rtl.be/"
         }
         
