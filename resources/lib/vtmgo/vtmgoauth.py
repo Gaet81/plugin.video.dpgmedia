@@ -174,13 +174,22 @@ class VtmGoAuth:
         }
         URL_RTL_LOGIN = 'https://sso.rtl.be/api/account/login'
         resp3 = util.http_post(URL_RTL_LOGIN, data=payloadRTL, headers=headersRTL)
-        xbmc.log(resp3.text,xbmc.LOGINFO)
-        xbmc.log(str(resp3.headers),xbmc.LOGINFO)
-        xbmc.log(str(resp3.cookies),xbmc.LOGINFO)
-        xbmc.log(str(resp3.history),xbmc.LOGINFO)
-        auth_info = json.loads(resp3.text)
-        self._account.id_token = auth_info.get('UID')
-        self._account.access_token = auth_info.get('UIDSignature')
+        login_info = json.loads(resp3.text)
+        URL_RTL_AUTHORIZE = 'https://sso.rtl.be/oidc/account/authenticate?RedirectUrl=/oidc/connect/authorize?response_type=code&client_id=lfvp-private&redirect_uri=https%3A%2F%2Fwww.rtlplay.be%2Frtlplay%2Flogin-callback&token=%s'
+        resp4 = util.http_get(URL_RTL_AUTHORIZE % login_info.get('token'))
+        
+        #xbmc.log(resp3.text,xbmc.LOGINFO)
+        #xbmc.log(str(resp3.headers),xbmc.LOGINFO)
+        #xbmc.log(str(resp3.cookies),xbmc.LOGINFO)
+        #xbmc.log(str(resp3.history),xbmc.LOGINFO)
+        xbmc.log(resp4.text,xbmc.LOGINFO)
+        xbmc.log(str(resp4.headers),xbmc.LOGINFO)
+        xbmc.log(str(resp4.cookies),xbmc.LOGINFO)
+        xbmc.log(str(resp4.history),xbmc.LOGINFO)
+        auth_info = json.loads(resp4.text)
+        self._account.id_token = info.get('UID')
+        self._account.access_token = info.get('UIDSignature')
+        
         self._save_cache()
           
                   
