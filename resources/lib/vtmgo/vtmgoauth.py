@@ -174,7 +174,7 @@ class VtmGoAuth:
             "format": "json"
         }
         URL_RTL_LOGIN = 'https://sso.rtl.be/api/account/login'
-        resp3 = util.http_post(URL_RTL_LOGIN, form=payloadRTL, headers=headersRTL)
+        resp3 = util.http_post(URL_RTL_LOGIN, data=payloadRTL, headers=headersRTL)
         xbmc.log(resp3.text,xbmc.LOGINFO)
         xbmc.log(str(resp3.headers),xbmc.LOGINFO)
         xbmc.log(str(resp3.cookies),xbmc.LOGINFO)
