@@ -172,10 +172,17 @@ class VtmGoAuth:
             "lang": "fr",
             "format": "json"
         }
+        try:  # Python 3
+            from urllib.parse import quote_plus
+        except ImportError:  # Python 2
+            # The package is named urlparse in Kodi 18
+            from urllib import quote_plus
         URL_RTL_LOGIN = 'https://sso.rtl.be/api/account/login'
         resp3 = util.http_post(URL_RTL_LOGIN, data=payloadRTL, headers=headersRTL)
         login_info = json.loads(resp3.text)
-        str3 = urllib.parse.quote_plus(urllib.parse.quote_plus('https://www.rtlplay.be/rtlplay/login-callback'))
+        str1 = 'https://sso.rtl.be/oidc/account/authenticate?RedirectUrl='
+        str2 = quote_plus('/oidc/connect/authorize?response_type=code&client_id=lfvp-private&redirect_uri=')
+        str3 = quote_plus(quote_plus('https://www.rtlplay.be/rtlplay/login-callback'))
         URL_RTL_AUTHORIZE = str1+str2+str3+'&token=%s' % login_info.get('token')
         resp4 = util.http_get(URL_RTL_AUTHORIZE)
         
