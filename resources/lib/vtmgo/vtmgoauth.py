@@ -155,9 +155,10 @@ class VtmGoAuth:
         self._account.UID = info.get('UID')
         self._account.UIDSignature = info.get('UIDSignature')
         self._account.signatureTimestamp = info.get('signatureTimestamp')
-        self._account.cookie_name = info.get('cookieName')
-        self._account.cookie_value = info.get('cookieValue')    
+        self._account.cookie_name = info.get('sessionInfo').get('cookieName')
+        self._account.cookie_value = info.get('sessionInfo').get('cookieValue')    
         self._account.login_ok = True
+        xbmc.log(str(self._account),xbmc.LOGINFO)
         
         headersRTL = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/117.0",
@@ -184,7 +185,7 @@ class VtmGoAuth:
         str1 = 'https://sso.rtl.be/oidc/account/authenticate?RedirectUrl='
         str2 = quote_plus('/oidc/connect/authorize?response_type=code&client_id=lfvp-private&redirect_uri=')
         str3 = quote_plus(quote_plus('https://www.rtlplay.be/rtlplay/login-callback'))
-        URL_RTL_AUTHORIZE = str1+str2+str3+'&token=%s' % login_info.get('encryptedToken')
+        URL_RTL_AUTHORIZE = str1+str2+str3+'&token=%s' % login_info.get('data').get('userAccount').get('session').get('encryptedToken')
         resp4 = util.http_get(URL_RTL_AUTHORIZE)
         
         
