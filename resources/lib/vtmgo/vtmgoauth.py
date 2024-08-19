@@ -179,6 +179,7 @@ class VtmGoAuth:
             from urllib import quote_plus
         URL_RTL_LOGIN = 'https://sso.rtl.be/api/account/login'
         resp3 = util.http_post(URL_RTL_LOGIN, data=payloadRTL, headers=headersRTL)
+        xbmc.log(resp3.text,xbmc.LOGINFO)
         login_info = json.loads(resp3.text)
         str1 = 'https://sso.rtl.be/oidc/account/authenticate?RedirectUrl='
         str2 = quote_plus('/oidc/connect/authorize?response_type=code&client_id=lfvp-private&redirect_uri=')
@@ -186,7 +187,7 @@ class VtmGoAuth:
         URL_RTL_AUTHORIZE = str1+str2+str3+'&token=%s' % login_info.get('encryptedToken')
         resp4 = util.http_get(URL_RTL_AUTHORIZE)
         
-        #xbmc.log(resp3.text,xbmc.LOGINFO)
+        
         #xbmc.log(str(resp3.headers),xbmc.LOGINFO)
         #xbmc.log(str(resp3.cookies),xbmc.LOGINFO)
         #xbmc.log(str(resp3.history),xbmc.LOGINFO)
