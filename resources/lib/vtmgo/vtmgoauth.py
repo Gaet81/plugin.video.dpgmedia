@@ -175,8 +175,9 @@ class VtmGoAuth:
         URL_RTL_LOGIN = 'https://sso.rtl.be/api/account/login'
         resp3 = util.http_post(URL_RTL_LOGIN, data=payloadRTL, headers=headersRTL)
         login_info = json.loads(resp3.text)
-        URL_RTL_AUTHORIZE = 'https://sso.rtl.be/oidc/account/authenticate?RedirectUrl=/oidc/connect/authorize?response_type=code&client_id=lfvp-private&redirect_uri=%s&token=%s'
-        resp4 = util.http_get(URL_RTL_AUTHORIZE % ('https://www.rtlplay.be/rtlplay/login-callback',login_info.get('token')))
+        str3 = urllib.parse.quote_plus(urllib.parse.quote_plus('https://www.rtlplay.be/rtlplay/login-callback'))
+        URL_RTL_AUTHORIZE = str1+str2+str3+'&token=%s' % login_info.get('token')
+        resp4 = util.http_get(URL_RTL_AUTHORIZE)
         
         #xbmc.log(resp3.text,xbmc.LOGINFO)
         #xbmc.log(str(resp3.headers),xbmc.LOGINFO)
