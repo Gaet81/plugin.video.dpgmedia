@@ -31,11 +31,11 @@ msgid "Show channel based overview"
 msgstr ""
 
 msgctxt "#30009"
-msgid "Search VTM GO"
+msgid "Search {service}"
 msgstr ""
 
 msgctxt "#30010"
-msgid "Search the VTM GO catalogue"
+msgid "Search the {service} catalogue"
 msgstr ""
 
 msgctxt "#30013"
@@ -47,7 +47,7 @@ msgid "Recommendations"
 msgstr ""
 
 msgctxt "#30016"
-msgid "Show the VTM GO recommendations"
+msgid "Show the {service} recommendations"
 msgstr ""
 
 msgctxt "#30017"
@@ -71,7 +71,7 @@ msgid "Kids"
 msgstr ""
 
 msgctxt "#30022"
-msgid "Show the VTM GO recommendations for Kids"
+msgid "Show the {service} recommendations for Kids"
 msgstr ""
 
 msgctxt "#30023"
