@@ -36,14 +36,7 @@ class AccountStorage:
     refresh_token = ''
     profile = ''
     product = ''
-    #login RTL
-    login_ok = False
-    UID = ''
-    UIDSignature = ''
-    signatureTimestamp = ''
-    cookie_name = ''
-    cookie_value = ''
-    
+   
     
     def is_valid_token(self):
         """ Validate the JWT to see if it's still valid.
