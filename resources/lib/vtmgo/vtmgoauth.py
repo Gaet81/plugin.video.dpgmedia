@@ -98,15 +98,18 @@ class VtmGoAuth:
         self._save_cache()
 
     def authorize(self,module):
+        url = ''
+        clientid = ''
         if module == 'VTM_GO':
-            return self._authorizeVTM()    
+            url = 'https://login2.vtm.be/device/authorize'
+            clientid = 'vtm-go-androidtv'
         else:
-            return self._authorizeRTL()
-    
-    def _authorizeVTM(self):    
+            url = 'https://sso.rtl.be/oidc/connect/device'
+            clientid = 'lfvp-tv'
+            
         """ Start the authorization flow. """
-        response = util.http_post('https://login2.vtm.be/device/authorize', form={
-            'client_id': 'vtm-go-androidtv',
+        response = util.http_post(url, form={
+            'client_id': clientid,
         })
         auth_info = json.loads(response.text)
         # We only need the device_code
@@ -115,96 +118,6 @@ class VtmGoAuth:
 
         return auth_info
         
-    def _authorizeRTL(self):
-        login = kodiutils.get_setting('rtlplaybe.login')
-        password = kodiutils.get_setting('rtlplaybe.password')
-        if login == '' or password == '':
-            kodiutils.notification(
-                kodiutils.localize(30751),
-                kodiutils.localize(30752) % ('RTLPlay (BE)', ('%s' % PUBLIC_SITE)))
-            return
-        
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/117.0",
-            "Accept": "*/*",
-            "Accept-Language": "fr-BE,en-US;q=0.7,en;q=0.3",
-            "Content-Type": "application/x-www-form-urlencoded",
-            "referrer": "https://cdns.eu1.gigya.com/"
-        }
-        API_KEY = "3_LGnnaXIFQ_VRXofTaFTGnc6q7pM923yFB0AXSWdxADsUT0y2dVdDKmPRyQMj7LMc"
-        payload = {
-            "loginID": login,
-            "password": password,
-            "ApiKey": API_KEY,
-            "lang": "fr",
-            "format": "json"
-        }
-        
-        #login gigya RTL
-        
-        URL_COMPTE_LOGIN = 'https://accounts.eu1.gigya.com/accounts.login'
-        resp2 = util.http_post(URL_COMPTE_LOGIN, form=payload, headers=headers)
-        xbmc.log(resp2.text,xbmc.LOGINFO)
-        xbmc.log(str(resp2.headers),xbmc.LOGINFO)
-        xbmc.log(str(resp2.cookies),xbmc.LOGINFO)
-        info = json.loads(resp2.text)
-        if "UID" not in info:
-            kodiutils.notification('ERROR', 'RTLPlay (BE) : ' + kodiutils.localize(30753))
-            return
-    
-        self._account.UID = info.get('UID')
-        self._account.UIDSignature = info.get('UIDSignature')
-        self._account.signatureTimestamp = info.get('signatureTimestamp')
-        self._account.cookie_name = info.get('sessionInfo').get('cookieName')
-        self._account.cookie_value = info.get('sessionInfo').get('cookieValue')    
-        self._account.login_ok = True
-        xbmc.log(str(self._account),xbmc.LOGINFO)
-        
-        headersRTL = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/117.0",
-            "Accept": "*/*",
-            "Accept-Language": "fr-BE,en-US;q=0.7,en;q=0.3",
-            "Content-Type": "application/json",
-        }
-        
-        payloadRTL = {
-            "username": login,
-            "password": password,
-            "lang": "fr",
-            "format": "json"
-        }
-        try:  # Python 3
-            from urllib.parse import quote_plus
-        except ImportError:  # Python 2
-            # The package is named urlparse in Kodi 18
-            from urllib import quote_plus
-        URL_RTL_LOGIN = 'https://sso.rtl.be/api/account/login'
-        resp3 = util.http_post(URL_RTL_LOGIN, data=payloadRTL, headers=headersRTL)
-        xbmc.log(resp3.text,xbmc.LOGINFO)
-        login_info = json.loads(resp3.text)
-        str1 = 'https://sso.rtl.be/oidc/account/authenticate?responseType=code&RedirectUrl='
-        str2 = quote_plus('/oidc/connect/authorize?response_type=code&client_id=lfvp-private&redirect_uri=')
-        str3 = quote_plus(quote_plus('https://www.rtlplay.be/rtlplay/login-callback'))
-        URL_RTL_AUTHORIZE = str1+str2+str3+'&token=%s' % login_info.get('data').get('userAccount').get('session').get('encryptedToken')
-        resp4 = util.http_get(URL_RTL_AUTHORIZE)
-        
-        
-        #xbmc.log(str(resp3.headers),xbmc.LOGINFO)
-        #xbmc.log(str(resp3.cookies),xbmc.LOGINFO)
-        #xbmc.log(str(resp3.history),xbmc.LOGINFO)
-        xbmc.log(resp4.text,xbmc.LOGINFO)
-        xbmc.log(str(resp4.headers),xbmc.LOGINFO)
-        xbmc.log(str(resp4.cookies),xbmc.LOGINFO)
-        xbmc.log(str(resp4.history),xbmc.LOGINFO)
-        auth_info = json.loads(resp4.text)
-        self._account.id_token = info.get('UID')
-        self._account.access_token = info.get('UIDSignature')
-        
-        self._save_cache()
-          
-                  
-        return auth_info
-
     def authorize_check(self):
         """ Check if the authorization has been completed. """
         if not self._account.device_code:
