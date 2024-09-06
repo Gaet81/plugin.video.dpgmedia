@@ -37,13 +37,13 @@ class Menu:
         kodiutils.show_listing(listing, sort=['unsorted'])
         
     @staticmethod
-    def show_mainmenu():
+    def show_mainmenu(module):
         """ Show the main menu """
         listing = []
 
         listing.append(kodiutils.TitleItem(
             title=kodiutils.localize(30007),  # TV Channels
-            path=kodiutils.url_for('show_channels'),
+            path=kodiutils.url_for('show_channels', module=module),
             art_dict=dict(
                 icon='DefaultAddonPVRClient.png',
                 fanart=kodiutils.get_addon_info('fanart'),
@@ -55,19 +55,19 @@ class Menu:
 
         listing.append(kodiutils.TitleItem(
             title=kodiutils.localize(30015),  # Recommendations
-            path=kodiutils.url_for('show_recommendations', storefront=STOREFRONT_MAIN),
+            path=kodiutils.url_for('show_recommendations', storefront=STOREFRONT_MAIN, module=module),
             art_dict=dict(
                 icon='DefaultFavourites.png',
                 fanart=kodiutils.get_addon_info('fanart'),
             ),
             info_dict=dict(
-                plot=kodiutils.localize(30016),
+                plot=kodiutils.localize(30016, service=module),
             ),
         ))
 
         listing.append(kodiutils.TitleItem(
             title=kodiutils.localize(30003),  # Movies
-            path=kodiutils.url_for('show_recommendations', storefront=STOREFRONT_MOVIES),
+            path=kodiutils.url_for('show_recommendations', storefront=STOREFRONT_MOVIES, module=module),
             art_dict=dict(
                 icon='DefaultMovies.png',
                 fanart=kodiutils.get_addon_info('fanart'),
@@ -79,7 +79,7 @@ class Menu:
 
         listing.append(kodiutils.TitleItem(
             title=kodiutils.localize(30005),  # Shorties
-            path=kodiutils.url_for('show_recommendations', storefront=STOREFRONT_SHORTIES),
+            path=kodiutils.url_for('show_recommendations', storefront=STOREFRONT_SHORTIES, module=module),
             art_dict=dict(
                 icon='DefaultTVShows.png',
                 fanart=kodiutils.get_addon_info('fanart'),
@@ -91,20 +91,20 @@ class Menu:
 
         listing.append(kodiutils.TitleItem(
             title=kodiutils.localize(30021),  # Kids
-            path=kodiutils.url_for('show_recommendations', storefront=STOREFRONT_KIDS),
+            path=kodiutils.url_for('show_recommendations', storefront=STOREFRONT_KIDS, module=module),
             art_dict=dict(
                 icon='DefaultFavourites.png',
                 fanart=kodiutils.get_addon_info('fanart'),
             ),
             info_dict=dict(
-                plot=kodiutils.localize(30022),
+                plot=kodiutils.localize(30022, service=module),
             ),
         ))
 
         if kodiutils.get_setting_bool('interface_show_mylist'):
             listing.append(kodiutils.TitleItem(
                 title=kodiutils.localize(30017),  # My List
-                path=kodiutils.url_for('show_mylist'),
+                path=kodiutils.url_for('show_mylist', module=module),
                 art_dict=dict(
                     icon='DefaultPlaylist.png',
                     fanart=kodiutils.get_addon_info('fanart'),
@@ -117,7 +117,7 @@ class Menu:
         if kodiutils.get_setting_bool('interface_show_continuewatching'):
             listing.append(kodiutils.TitleItem(
                 title=kodiutils.localize(30019),  # Continue watching
-                path=kodiutils.url_for('show_continuewatching'),
+                path=kodiutils.url_for('show_continuewatching', module=module),
                 art_dict=dict(
                     icon='DefaultInProgressShows.png',
                     fanart=kodiutils.get_addon_info('fanart'),
@@ -129,17 +129,17 @@ class Menu:
 
         listing.append(kodiutils.TitleItem(
             title=kodiutils.localize(30009),  # Search
-            path=kodiutils.url_for('show_search'),
+            path=kodiutils.url_for('show_search', module=module),
             art_dict=dict(
                 icon='DefaultAddonsSearch.png',
                 fanart=kodiutils.get_addon_info('fanart'),
             ),
             info_dict=dict(
-                plot=kodiutils.localize(30010),
+                plot=kodiutils.localize(30010, service=module),
             ),
         ))
 
-        kodiutils.show_listing(listing, sort=['unsorted'])
+        kodiutils.show_listing(listing, sort=['unsorted'], module=module)
 
     @staticmethod
     def format_plot(obj):
