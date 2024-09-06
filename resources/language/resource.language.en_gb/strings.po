@@ -189,7 +189,7 @@ msgid "Go to {url} on another device and enter use code [B]{code}[/B] when loggi
 msgstr ""
 
 msgctxt "#30702"
-msgid "This device is successfully logged in to the VTM Go Service."
+msgid "This device is successfully logged in to the {service} Service."
 msgstr ""
 
 msgctxt "#30703"
