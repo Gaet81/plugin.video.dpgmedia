@@ -124,9 +124,17 @@ class VtmGoAuth:
             raise NoLoginException
 
         try:
-            response = util.http_post('https://login2.vtm.be/token', form={
+            url = ''
+            clientid = ''
+            if module == 'VTM_GO':
+                url = 'https://login2.vtm.be/token'
+                clientid = 'vtm-go-androidtv'
+            else:
+                url = 'https://sso.rtl.be/oidc/connect/token'
+                clientid = 'lfvp-tv'
+            response = util.http_post(url, form={
                 'device_code': self._account.device_code,
-                'client_id': 'vtm-go-androidtv',
+                'client_id': clientid,
                 'grant_type': 'urn:ietf:params:oauth:grant-type:device_code',
             })
         except HTTPError as exc:
@@ -140,10 +148,15 @@ class VtmGoAuth:
         self._account.refresh_token = auth_info.get('refresh_token')
 
         # Fetch an actual token we can use
-        response = util.http_post('https://lfvp-api.dpgmedia.net/VTM_GO/tokens', data={
+        if module == 'VTM_GO':
+            url = 'https://lfvp-api.dpgmedia.net/VTM_GO/tokens'
+        else:
+            url = 'https://lfvp-api.dpgmedia.net/RTL_PLAY/tokens'
+                
+        response = util.http_post(url, data={
             'device': {
                 'id': str(uuid.uuid4()),
-                'name': 'VTM Go Addon on Kodi',
+                'name': 'dpgmedia Addon on Kodi',
             },
             'idToken': self._account.id_token,
         })
