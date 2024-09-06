@@ -45,10 +45,10 @@ class Authentication:
                 return
 
             # Check if we are authorized now
-            check = self._auth.authorize_check()
+            check = self._auth.authorize_check(module)
             if check:
                 progress_dialog.close()
-                kodiutils.notification(kodiutils.localize(30702))
+                kodiutils.notification(kodiutils.localize(30702,service=module))
                 kodiutils.redirect(kodiutils.url_for('show_main_menu'))
                 return
 
@@ -57,18 +57,6 @@ class Authentication:
 
         # Close progress indicator
         progress_dialog.close()
-
-        kodiutils.ok_dialog(message=kodiutils.localize(30703))
-
-    def _loginRTL(self,module):
-        auth_info = self._auth.authorize(module)
-        
-        # Check if we are authorized now
-        check = auth_info.get('login_ok')
-        if check:
-            kodiutils.notification(kodiutils.localize(30702))
-            kodiutils.redirect(kodiutils.url_for('show_main_menu'))
-            return
 
         kodiutils.ok_dialog(message=kodiutils.localize(30703))
 
