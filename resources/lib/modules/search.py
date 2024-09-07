@@ -20,6 +20,7 @@ class Search:
         """ Initialise object """
         auth = VtmGoAuth(kodiutils.get_tokens_path())
         self._api = VtmGo(auth.get_tokens(module))
+        self._module = module
 
     def show_search(self, query=None):
         """ Shows the search dialog
@@ -27,7 +28,7 @@ class Search:
         """
         if not query:
             # Ask for query
-            query = kodiutils.get_search_string(heading=kodiutils.localize(30009))  # Search VTM GO
+            query = kodiutils.get_search_string(heading=kodiutils.localize(30009,service=self._module))  # Search VTM GO
             if not query:
                 kodiutils.end_of_directory()
                 return
