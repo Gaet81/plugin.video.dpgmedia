@@ -41,7 +41,7 @@ class Channels:
             context_menu = [(
                 kodiutils.localize(30052, channel=title),  # Watch live {channel}
                 'PlayMedia(%s)' %
-                kodiutils.url_for('play', category='channels', item=channel.channel_id),
+                kodiutils.url_for('play', module = module, category='channels', item=channel.channel_id),
             )]
 
             if channel_data and channel_data.get('epg'):
@@ -108,7 +108,7 @@ class Channels:
         # The .pvr suffix triggers some code paths in Kodi to mark this as a live channel
         listing = [kodiutils.TitleItem(
             title=label,
-            path=kodiutils.url_for('play', category='channels', item=channel.channel_id) + '?.pvr',
+            path=kodiutils.url_for('play', module = module, category='channels', item=channel.channel_id) + '?.pvr',
             art_dict=dict(
                 icon=icon,
                 thumb=icon,
