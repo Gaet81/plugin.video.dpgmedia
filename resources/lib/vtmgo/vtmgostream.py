@@ -165,10 +165,13 @@ class VtmGoStream:
         url = 'https://videoplayer-service.dpgmedia.net/play-config/%s' % stream_id
         _LOGGER.debug('Getting video info from %s', url)
         zone = ''
+        api_key = ''
         if self._module == 'VTM_GO':
             zone = 'vtmgo'
+            api_key = self._V6_API_KEY
         else:
             zone = 'rtlplay'
+            api_key = '2W7kCXUTyUgKf7HKlK9qcYJvFmiPFaBEFT90eC2b'
         response = util.http_post(url,
                                   params={
                                       'startPosition': '0.0',
@@ -180,7 +183,7 @@ class VtmGoStream:
                                   },
                                   headers={
                                       'Accept': 'application/json',
-                                      'x-api-key': self._V6_API_KEY,
+                                      'x-api-key': api_key,
                                       'Popcorn-SDK-Version': '7',
                                       'Authorization': 'Bearer ' + player_token,
                                   })
