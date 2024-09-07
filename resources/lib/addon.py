@@ -165,12 +165,12 @@ def show_continuewatching(module):
     Catalog(module).show_continuewatching()
 
 
-@routing.route('/search')
-@routing.route('/search/<query>')
-def show_search(query=None):
+@routing.route('/search/<module>')
+@routing.route('/search/<module>/<query>')
+def show_search(module, query=None):
     """ Shows the search dialog """
     from resources.lib.modules.search import Search
-    Search().show_search(query)
+    Search(module).show_search(query)
 
 
 @routing.route('/play/epg/<channel>/<timestamp>')
