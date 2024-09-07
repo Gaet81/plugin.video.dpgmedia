@@ -82,18 +82,18 @@ def show_channels(module):
     Channels(module).show_channels(module)
 
 
-@routing.route('/channels/<channel>')
-def show_channel_menu(channel):
+@routing.route('/channels/<module>/<channel>')
+def show_channel_menu(module,channel):
     """ Shows Live TV channels """
     from resources.lib.modules.channels import Channels
-    Channels().show_channel_menu(channel)
+    Channels().show_channel_menu(module,channel)
 
 
-@routing.route('/tvguide/channel/<channel>')
-def show_tvguide_channel(channel):
+@routing.route('/tvguide/channel/<module>/<channel>')
+def show_tvguide_channel(module, channel):
     """ Shows the dates in the tv guide """
     from resources.lib.modules.tvguide import TvGuide
-    TvGuide().show_tvguide_channel(channel)
+    TvGuide().show_tvguide_channel(module, channel)
 
 
 @routing.route('/tvguide/channel/<channel>/<date>')
