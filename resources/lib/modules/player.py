@@ -18,10 +18,10 @@ _LOGGER = logging.getLogger(__name__)
 class Player:
     """ Code responsible for playing media """
 
-    def __init__(self):
+    def __init__(self, module):
         """ Initialise object """
         auth = VtmGoAuth(kodiutils.get_tokens_path())
-        self._api = VtmGo(auth.get_tokens())
+        self._api = VtmGo(auth.get_tokens(module))
         self._stream = VtmGoStream(auth.get_tokens())
 
     def play_or_live(self, category, item, channel):
