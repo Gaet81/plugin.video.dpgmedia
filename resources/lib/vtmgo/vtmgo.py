@@ -5,6 +5,7 @@ from __future__ import absolute_import, division, unicode_literals
 
 import json
 import logging
+import xbmc
 
 from resources.lib import kodiutils
 from resources.lib.vtmgo import API_ANDROID_ENDPOINT, API_ENDPOINT, Category, Episode, LiveChannel, LiveChannelEpg, Movie, Program, Season, util, Teaser
