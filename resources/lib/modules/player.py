@@ -22,7 +22,7 @@ class Player:
         """ Initialise object """
         auth = VtmGoAuth(kodiutils.get_tokens_path())
         self._api = VtmGo(auth.get_tokens(module))
-        self._stream = VtmGoStream(auth.get_tokens())
+        self._stream = VtmGoStream(auth.get_tokens(module),module)
 
     def play_or_live(self, category, item, channel):
         """ Ask to play the requested item or switch to the live channel
@@ -208,7 +208,7 @@ class Player:
                 firstaired=next_episode.aired[:10] if next_episode.aired else '',
                 runtime=next_episode.duration,
             ),
-            play_url='plugin://plugin.video.vtm.go/play/catalog/episodes/%s' % next_episode.episode_id,
+            play_url='plugin://plugin.video.dpgmedia/play/catalog/episodes/%s' % next_episode.episode_id,
         )
 
         return upnext_info
@@ -221,5 +221,5 @@ class Player:
         from base64 import b64encode
         from json import dumps
         data = [kodiutils.to_unicode(b64encode(dumps(upnext_info).encode()))]
-        sender = '{addon_id}.SIGNAL'.format(addon_id='plugin.video.vtm.go')
+        sender = '{addon_id}.SIGNAL'.format(addon_id='plugin.video.dpgmedia')
         kodiutils.notify(sender=sender, message='upnext_data', data=data)
