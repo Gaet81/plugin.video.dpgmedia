@@ -508,6 +508,7 @@ class VtmGo:
     def get_product():
         """ Return the product that is currently selected. """
         profile = kodiutils.get_setting('profile')
+        xbmc.log('product'+profile,xbmc.LOGINFO)
         try:
             return profile.split(':')[1]
         except (IndexError, AttributeError):
