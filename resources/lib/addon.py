@@ -13,6 +13,7 @@ from resources.lib.vtmgo.vtmgoauth import VtmGoAuth
 routing = routing.Plugin()  # pylint: disable=invalid-name
 
 _LOGGER = logging.getLogger(__name__)
+module = 'VTM_GO' 
 
 
 @routing.route('/')
@@ -29,19 +30,20 @@ def show_module_menu():
 def show_VTM():
     """ Show the profile selection, or go to the main menu. """
     auth = VtmGoAuth(kodiutils.get_tokens_path())
-    if auth.get_tokens('VTM_GO'):
-        show_main_menu('VTM_GO')
+    if auth.get_tokens(module):
+        show_main_menu(module)
     else:
-        show_login_menu('VTM_GO')
+        show_login_menu(module)
 
 @routing.route('/rtl')
 def show_RTL():
     """ Show the profile selection, or go to the main menu. """
     auth = VtmGoAuth(kodiutils.get_tokens_path())
-    if auth.get_tokens('RTL_PLAY'):
-        show_main_menu('RTL_PLAY')
+    module = 'RTL_PLAY'
+    if auth.get_tokens():
+        show_main_menu(module)
     else:
-        show_login_menu('RTL_PLAY')
+        show_login_menu(module)
     
 @routing.route('/menu')
 def show_main_menu(module):
@@ -72,10 +74,10 @@ def auth_clear_cache():
 
 
 @routing.route('/channels')
-def show_channels():
+def show_channels(module):
     """ Shows Live TV channels """
     from resources.lib.modules.channels import Channels
-    Channels().show_channels()
+    Channels(module).show_channels(module)
 
 
 @routing.route('/channels/<channel>')
