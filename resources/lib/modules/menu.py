@@ -192,7 +192,7 @@ class Menu:
         return plot.rstrip()
 
     @classmethod
-    def generate_titleitem(cls, item, progress=False):
+    def generate_titleitem(cls, item, progress=False, module):
         """ Generate a TitleItem based on a Movie, Program or Episode.
         :type item: Union[Movie, Program, Episode]
         :type progress: bool
