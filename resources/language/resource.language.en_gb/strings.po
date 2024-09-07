@@ -197,7 +197,7 @@ msgid "The login code has expired. Please try again."
 msgstr ""
 
 msgctxt "#30705"
-msgid "The VTM GO Service has been updated, but this add-on hasn't been modified yet for these changes. Please check for an update."
+msgid "The {service} Service has been updated, but this add-on hasn't been modified yet for these changes. Please check for an update."
 msgstr ""
 
 msgctxt "#30706"
@@ -233,7 +233,7 @@ msgid "The requested video was not found in the guide."
 msgstr ""
 
 msgctxt "#30717"
-msgid "This program is not available in the VTM GO catalogue."
+msgid "This program is not available in the {service} catalogue."
 msgstr ""
 
 msgctxt "#30751"
