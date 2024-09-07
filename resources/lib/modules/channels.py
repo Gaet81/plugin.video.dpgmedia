@@ -61,7 +61,7 @@ class Channels:
 
             listing.append(kodiutils.TitleItem(
                 title=label,
-                path=kodiutils.url_for('show_channel_menu', [module, channel=channel.key]),
+                path=kodiutils.url_for('show_channel_menu', [module, channel.key]),
                 art_dict=dict(
                     icon=icon,
                     thumb=icon,
