@@ -171,6 +171,7 @@ class VtmGo:
                                  token=self._tokens.access_token if self._tokens else None,
                                  profile=self._tokens.profile if self._tokens else None)
         info = json.loads(response.text)
+        xbmc.log('live channels'+response.text,xbmc.LOGINFO
 
         channels = []
         for item in info.get('channels'):
