@@ -9,8 +9,6 @@ import os
 import uuid
 import xbmc
 
-#login RTL
-import re
 
 from requests import HTTPError
 from resources.lib import kodiutils
