@@ -187,11 +187,11 @@ def play_or_live(category, item, channel):
     Player().play_or_live(category, item, channel)
 
 
-@routing.route('/play/catalog/<category>/<item>')
-def play(category, item):
+@routing.route('/play/catalog/<module>/<category>/<item>')
+def play(module, category, item):
     """ Play the requested item """
     from resources.lib.modules.player import Player
-    Player().play(category, item)
+    Player().play(module, category, item)
 
 
 @routing.route('/iptv/channels')
