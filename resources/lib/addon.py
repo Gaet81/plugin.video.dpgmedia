@@ -89,11 +89,11 @@ def show_channel_menu(module,channel):
     Channels().show_channel_menu(module,channel)
 
 
-@routing.route('/tvguide/channel/<module>/<channel>')
+@routing.route('/tvguide/channel/<channel>')
 def show_tvguide_channel(module, channel):
     """ Shows the dates in the tv guide """
     from resources.lib.modules.tvguide import TvGuide
-    TvGuide().show_tvguide_channel(module, channel)
+    TvGuide().show_tvguide_channel(channel)
 
 
 @routing.route('/tvguide/channel/<channel>/<date>')
