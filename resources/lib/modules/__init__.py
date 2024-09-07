@@ -149,7 +149,6 @@ CHANNELS = OrderedDict([
     ('tvi', dict(
         label='RTL tvi',
         logo='tvi',
-        epg='tvi',
         iptv_preset=130,
         iptv_id='tvi.be',
         studio_icon='RTL tvi',
@@ -157,7 +156,6 @@ CHANNELS = OrderedDict([
     ('club', dict(
         label='RTL club',
         logo='club',
-        epg='club',
         iptv_preset=131,
         iptv_id='club.be',
         studio_icon='RTL club',
@@ -165,7 +163,6 @@ CHANNELS = OrderedDict([
     ('plug', dict(
         label='RTL plug',
         logo='plug',
-        epg='plug',
         iptv_preset=132,
         iptv_id='plug.be',
         studio_icon='RTL plug',
@@ -173,7 +170,6 @@ CHANNELS = OrderedDict([
     ('contact', dict(
         label='RADIO Contact',
         logo='contact',
-        epg='contact',
         iptv_preset=133,
         iptv_id='contact.be',
         studio_icon='RADIO Contact',
@@ -181,7 +177,6 @@ CHANNELS = OrderedDict([
     ('bel', dict(
         label='bel RTL',
         logo='bel',
-        epg='bel',
         iptv_preset=134,
         iptv_id='bel.be',
         studio_icon='bel RTL',
