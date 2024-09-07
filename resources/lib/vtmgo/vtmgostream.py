@@ -165,7 +165,7 @@ class VtmGoStream:
         url = 'https://videoplayer-service.dpgmedia.net/play-config/%s' % stream_id
         _LOGGER.debug('Getting video info from %s', url)
         zone = ''
-        if if self._module == 'VTM_GO':
+        if self._module == 'VTM_GO':
             zone = 'vtmgo'
         else:
             zone = 'rtlplay'
