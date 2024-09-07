@@ -17,11 +17,8 @@ _LOGGER = logging.getLogger(__name__)
 # Setup a static session that can be reused for all calls
 SESSION = requests.Session()
 SESSION.headers = {
-    'User-Agent': 'VTM_GO/17.240626 (be.vmma.vtm.zenderapp; build:19069; Android 28) okhttp/4.12.0',
+    'User-Agent': 'Kodi/18.5 (X11; Linux armv71) Linux/2019.11-1 HW_RaspberryPi/1.0 App_Bitness/32 Version/17.240626',
     'x-app-version': '17',
-    'x-persgroep-mobile-app': 'true',
-    'x-persgroep-os': 'android',
-    'x-persgroep-os-version': '28',
 }
 
 PROXIES = kodiutils.get_proxies()
