@@ -20,13 +20,18 @@ class VtmGoStream:
 
     _V6_API_KEY = 'r9EOnHOp1pPL5L4FuGzBPSIHwrQnPu5TBfW16y75'
 
-    def __init__(self, tokens=None):
+    def __init__(self, tokens=None, module=''):
         """ Initialise object """
         self._tokens = tokens
+        self._module = module
 
     def _mode(self):
         """ Return the mode that should be used for API calls """
-        return 'vtmgo-kids' if self._tokens.product == 'VTM_GO_KIDS' else 'VTM_GO'
+        if self._module == 'VTM_GO':
+            return 'vtmgo-kids' if self._tokens.product == 'VTM_GO_KIDS' else 'VTM_GO'
+        else:
+            return 'rtlplay-kids' if self._tokens.product == 'RTL_PLAY_KIDS' else 'RTL_PLAY'
+        
 
     def get_stream(self, stream_type, stream_id):
         """ Return a ResolvedStream based on the stream type and id.
@@ -159,6 +164,11 @@ class VtmGoStream:
         """
         url = 'https://videoplayer-service.dpgmedia.net/play-config/%s' % stream_id
         _LOGGER.debug('Getting video info from %s', url)
+        zone = ''
+        if if self._module == 'VTM_GO':
+            zone = 'vtmgo'
+        else:
+            zone = 'rtlplay'
         response = util.http_post(url,
                                   params={
                                       'startPosition': '0.0',
@@ -166,7 +176,7 @@ class VtmGoStream:
                                   },
                                   data={
                                       'deviceType': 'android-tv',
-                                      'zone': 'vtmgo',
+                                      'zone': zone,
                                   },
                                   headers={
                                       'Accept': 'application/json',
