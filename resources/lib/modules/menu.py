@@ -220,13 +220,13 @@ class Menu:
                 context_menu = [(
                     kodiutils.localize(30101),  # Remove from My List
                     'Container.Update(%s)' %
-                    kodiutils.url_for('mylist_del', module=self._module, content_id=item.movie_id)
+                    kodiutils.url_for('mylist_del', module=module, content_id=item.movie_id)
                 )]
             else:
                 context_menu = [(
                     kodiutils.localize(30100),  # Add to My List
                     'Container.Update(%s)' %
-                    kodiutils.url_for('mylist_add', module=self._module, content_id=item.movie_id)
+                    kodiutils.url_for('mylist_add', module=module, content_id=item.movie_id)
                 )]
 
             info_dict.update({
@@ -244,7 +244,7 @@ class Menu:
 
             return kodiutils.TitleItem(
                 title=item.name,
-                path=kodiutils.url_for('play', module=self._module, category='movies', item=item.movie_id),
+                path=kodiutils.url_for('play', module=module, category='movies', item=item.movie_id),
                 art_dict=art_dict,
                 info_dict=info_dict,
                 stream_dict=stream_dict,
@@ -261,13 +261,13 @@ class Menu:
                 context_menu = [(
                     kodiutils.localize(30101),  # Remove from My List
                     'Container.Update(%s)' %
-                    kodiutils.url_for('mylist_del', module=self._module, content_id=item.program_id)
+                    kodiutils.url_for('mylist_del', module=module, content_id=item.program_id)
                 )]
             else:
                 context_menu = [(
                     kodiutils.localize(30100),  # Add to My List
                     'Container.Update(%s)' %
-                    kodiutils.url_for('mylist_add', module=self._module, content_id=item.program_id)
+                    kodiutils.url_for('mylist_add', module=module, content_id=item.program_id)
                 )]
 
             info_dict.update({
@@ -278,7 +278,7 @@ class Menu:
 
             return kodiutils.TitleItem(
                 title=item.name,
-                path=kodiutils.url_for('show_catalog_program', module=self._module, program=item.program_id),
+                path=kodiutils.url_for('show_catalog_program', module=module, program=item.program_id),
                 art_dict=art_dict,
                 info_dict=info_dict,
                 prop_dict=prop_dict,
@@ -294,7 +294,7 @@ class Menu:
                 context_menu = [(
                     kodiutils.localize(30102),  # Go to Program
                     'Container.Update(%s)' %
-                    kodiutils.url_for('show_catalog_program', module=self._module, program=item.program_id)
+                    kodiutils.url_for('show_catalog_program', module=module, program=item.program_id)
                 )]
 
             info_dict.update({
@@ -327,7 +327,7 @@ class Menu:
 
             return kodiutils.TitleItem(
                 title=info_dict['title'],
-                path=kodiutils.url_for('play', module=self._module, category='episodes', item=item.episode_id),
+                path=kodiutils.url_for('play', module=module, category='episodes', item=item.episode_id),
                 art_dict=art_dict,
                 info_dict=info_dict,
                 stream_dict=stream_dict,
@@ -344,13 +344,13 @@ class Menu:
             #     context_menu = [(
             #         kodiutils.localize(30101),  # Remove from My List
             #         'Container.Update(%s)' %
-            #         kodiutils.url_for('mylist_del', module=self._module, content_id=item.program_id)
+            #         kodiutils.url_for('mylist_del', module=module, content_id=item.program_id)
             #     )]
             # else:
             #     context_menu = [(
             #         kodiutils.localize(30100),  # Add to My List
             #         'Container.Update(%s)' %
-            #         kodiutils.url_for('mylist_add', module=self._module, content_id=item.program_id)
+            #         kodiutils.url_for('mylist_add', module=module, content_id=item.program_id)
             #     )]
 
             # info_dict.update({
@@ -361,7 +361,7 @@ class Menu:
 
             return kodiutils.TitleItem(
                 title=info_dict['title'],
-                path=kodiutils.url_for('show_detail', module=self._module, item=item.detail_id),
+                path=kodiutils.url_for('show_detail', module=module, item=item.detail_id),
                 art_dict=art_dict,
                 info_dict=info_dict,
                 prop_dict=prop_dict,
