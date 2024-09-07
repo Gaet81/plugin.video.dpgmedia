@@ -15,29 +15,30 @@ _LOGGER = logging.getLogger(__name__)
 class Menu:
     """ Menu code """
 
-    def __init__(self):
+    def __init__(self, module):
         """ Initialise object """
+        self._module = module
 
     @staticmethod
-    def show_mainmenu():
+    def show_mainmenu(module):
         """ Show the main menu """
         listing = []
 
         listing.append(kodiutils.TitleItem(
             title=kodiutils.localize(30007),  # TV Channels
-            path=kodiutils.url_for('show_channels'),
+            path=kodiutils.url_for('show_channels', module = module),
             art_dict=dict(
                 icon='DefaultAddonPVRClient.png',
                 fanart=kodiutils.get_addon_info('fanart'),
             ),
             info_dict=dict(
                 plot=kodiutils.localize(30008),
-            ),
+            ),https://live-video.dpgmedia.net/83ac8fe07ddd10cf/out/v1/dba39cf6cae74bfc894b7e68a7d052bd/index.mpd
         ))
 
         listing.append(kodiutils.TitleItem(
             title=kodiutils.localize(30015),  # Recommendations
-            path=kodiutils.url_for('show_recommendations', storefront=STOREFRONT_MAIN),
+            path=kodiutils.url_for('show_recommendations', module=module, storefront=STOREFRONT_MAIN),
             art_dict=dict(
                 icon='DefaultFavourites.png',
                 fanart=kodiutils.get_addon_info('fanart'),
@@ -49,7 +50,7 @@ class Menu:
 
         listing.append(kodiutils.TitleItem(
             title=kodiutils.localize(30003),  # Movies
-            path=kodiutils.url_for('show_recommendations', storefront=STOREFRONT_MOVIES),
+            path=kodiutils.url_for('show_recommendations', module=module, storefront=STOREFRONT_MOVIES),
             art_dict=dict(
                 icon='DefaultMovies.png',
                 fanart=kodiutils.get_addon_info('fanart'),
@@ -61,7 +62,7 @@ class Menu:
 
         listing.append(kodiutils.TitleItem(
             title=kodiutils.localize(30005),  # Shorties
-            path=kodiutils.url_for('show_recommendations', storefront=STOREFRONT_SHORTIES),
+            path=kodiutils.url_for('show_recommendations', module=module, storefront=STOREFRONT_SHORTIES),
             art_dict=dict(
                 icon='DefaultTVShows.png',
                 fanart=kodiutils.get_addon_info('fanart'),
@@ -73,7 +74,7 @@ class Menu:
 
         listing.append(kodiutils.TitleItem(
             title=kodiutils.localize(30021),  # Kids
-            path=kodiutils.url_for('show_recommendations', storefront=STOREFRONT_KIDS),
+            path=kodiutils.url_for('show_recommendations', module=module, storefront=STOREFRONT_KIDS),
             art_dict=dict(
                 icon='DefaultFavourites.png',
                 fanart=kodiutils.get_addon_info('fanart'),
@@ -86,7 +87,7 @@ class Menu:
         if kodiutils.get_setting_bool('interface_show_mylist'):
             listing.append(kodiutils.TitleItem(
                 title=kodiutils.localize(30017),  # My List
-                path=kodiutils.url_for('show_mylist'),
+                path=kodiutils.url_for('show_mylist', module=module),
                 art_dict=dict(
                     icon='DefaultPlaylist.png',
                     fanart=kodiutils.get_addon_info('fanart'),
@@ -99,7 +100,7 @@ class Menu:
         if kodiutils.get_setting_bool('interface_show_continuewatching'):
             listing.append(kodiutils.TitleItem(
                 title=kodiutils.localize(30019),  # Continue watching
-                path=kodiutils.url_for('show_continuewatching'),
+                path=kodiutils.url_for('show_continuewatching', module=module),
                 art_dict=dict(
                     icon='DefaultInProgressShows.png',
                     fanart=kodiutils.get_addon_info('fanart'),
@@ -201,13 +202,13 @@ class Menu:
                 context_menu = [(
                     kodiutils.localize(30101),  # Remove from My List
                     'Container.Update(%s)' %
-                    kodiutils.url_for('mylist_del', content_id=item.movie_id)
+                    kodiutils.url_for('mylist_del', module=self._module, content_id=item.movie_id)
                 )]
             else:
                 context_menu = [(
                     kodiutils.localize(30100),  # Add to My List
                     'Container.Update(%s)' %
-                    kodiutils.url_for('mylist_add', content_id=item.movie_id)
+                    kodiutils.url_for('mylist_add', module=self._module, content_id=item.movie_id)
                 )]
 
             info_dict.update({
@@ -225,7 +226,7 @@ class Menu:
 
             return kodiutils.TitleItem(
                 title=item.name,
-                path=kodiutils.url_for('play', category='movies', item=item.movie_id),
+                path=kodiutils.url_for('play', module=self._module, category='movies', item=item.movie_id),
                 art_dict=art_dict,
                 info_dict=info_dict,
                 stream_dict=stream_dict,
@@ -242,13 +243,13 @@ class Menu:
                 context_menu = [(
                     kodiutils.localize(30101),  # Remove from My List
                     'Container.Update(%s)' %
-                    kodiutils.url_for('mylist_del', content_id=item.program_id)
+                    kodiutils.url_for('mylist_del', module=self._module, content_id=item.program_id)
                 )]
             else:
                 context_menu = [(
                     kodiutils.localize(30100),  # Add to My List
                     'Container.Update(%s)' %
-                    kodiutils.url_for('mylist_add', content_id=item.program_id)
+                    kodiutils.url_for('mylist_add', module=self._module, content_id=item.program_id)
                 )]
 
             info_dict.update({
@@ -259,7 +260,7 @@ class Menu:
 
             return kodiutils.TitleItem(
                 title=item.name,
-                path=kodiutils.url_for('show_catalog_program', program=item.program_id),
+                path=kodiutils.url_for('show_catalog_program', module=self._module, program=item.program_id),
                 art_dict=art_dict,
                 info_dict=info_dict,
                 prop_dict=prop_dict,
@@ -275,7 +276,7 @@ class Menu:
                 context_menu = [(
                     kodiutils.localize(30102),  # Go to Program
                     'Container.Update(%s)' %
-                    kodiutils.url_for('show_catalog_program', program=item.program_id)
+                    kodiutils.url_for('show_catalog_program', module=self._module, program=item.program_id)
                 )]
 
             info_dict.update({
@@ -308,7 +309,7 @@ class Menu:
 
             return kodiutils.TitleItem(
                 title=info_dict['title'],
-                path=kodiutils.url_for('play', category='episodes', item=item.episode_id),
+                path=kodiutils.url_for('play', module=self._module, category='episodes', item=item.episode_id),
                 art_dict=art_dict,
                 info_dict=info_dict,
                 stream_dict=stream_dict,
@@ -325,13 +326,13 @@ class Menu:
             #     context_menu = [(
             #         kodiutils.localize(30101),  # Remove from My List
             #         'Container.Update(%s)' %
-            #         kodiutils.url_for('mylist_del', content_id=item.program_id)
+            #         kodiutils.url_for('mylist_del', module=self._module, content_id=item.program_id)
             #     )]
             # else:
             #     context_menu = [(
             #         kodiutils.localize(30100),  # Add to My List
             #         'Container.Update(%s)' %
-            #         kodiutils.url_for('mylist_add', content_id=item.program_id)
+            #         kodiutils.url_for('mylist_add', module=self._module, content_id=item.program_id)
             #     )]
 
             # info_dict.update({
@@ -342,7 +343,7 @@ class Menu:
 
             return kodiutils.TitleItem(
                 title=info_dict['title'],
-                path=kodiutils.url_for('show_detail', item=item.detail_id),
+                path=kodiutils.url_for('show_detail', module=self._module, item=item.detail_id),
                 art_dict=art_dict,
                 info_dict=info_dict,
                 prop_dict=prop_dict,
