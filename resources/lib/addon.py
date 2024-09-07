@@ -24,7 +24,7 @@ def index():
 def show_module_menu():
     """ Show the module menu """
     from resources.lib.modules.menu import Menu
-    Menu().show_modulemenu()
+    Menu('').show_modulemenu()
 
 @routing.route('/vtm')
 def show_VTM():
