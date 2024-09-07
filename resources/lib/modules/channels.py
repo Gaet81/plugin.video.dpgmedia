@@ -20,12 +20,12 @@ class Channels:
     def __init__(self,module):
         """ Initialise object """
         auth = VtmGoAuth(kodiutils.get_tokens_path())
-        self._api = VtmGo(auth.get_tokens(module))
+        self._api = VtmGo(module, auth.get_tokens(module))
 
     def show_channels(self,module):
         """ Shows TV channels """
         # Fetch EPG from API
-        channels = self._api.get_live_channels(module)
+        channels = self._api.get_live_channels()
 
         listing = []
         for channel in channels:
@@ -88,7 +88,7 @@ class Channels:
         :type key: str
         """
         # Fetch EPG from API
-        channel = self._api.get_live_channel(module, key)
+        channel = self._api.get_live_channel(key)
         channel_data = CHANNELS.get(channel.key)
 
         fanart = channel.background
