@@ -38,10 +38,10 @@ def show_VTM():
 def show_RTL():
     """ Show the profile selection, or go to the main menu. """
     auth = VtmGoAuth(kodiutils.get_tokens_path())
-    if auth.get_tokens('rtlplay'):
-        show_main_menu('rtlplay')
+    if auth.get_tokens('RTL_PLAY'):
+        show_main_menu('RTL_PLAY')
     else:
-        show_login_menu('rtlplay')
+        show_login_menu('RTL_PLAY')
     
 @routing.route('/menu')
 def show_main_menu(module):
