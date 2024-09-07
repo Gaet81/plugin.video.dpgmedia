@@ -56,19 +56,19 @@ class Menu:
 
         listing.append(kodiutils.TitleItem(
             title=kodiutils.localize(30015),  # Recommendations
-            path=kodiutils.url_for('show_recommendations', module=module, storefront=STOREFRONT_MAIN, module=module),
+            path=kodiutils.url_for('show_recommendations', module=module, storefront=STOREFRONT_MAIN),
             art_dict=dict(
                 icon='DefaultFavourites.png',
                 fanart=kodiutils.get_addon_info('fanart'),
             ),
             info_dict=dict(
-                plot=kodiutils.localize(30016, service=module),
+                plot=kodiutils.localize(30016,service=module),
             ),
         ))
 
         listing.append(kodiutils.TitleItem(
             title=kodiutils.localize(30003),  # Movies
-            path=kodiutils.url_for('show_recommendations', module=module, storefront=STOREFRONT_MOVIES, module=module),
+            path=kodiutils.url_for('show_recommendations', module=module, storefront=STOREFRONT_MOVIES),
             art_dict=dict(
                 icon='DefaultMovies.png',
                 fanart=kodiutils.get_addon_info('fanart'),
@@ -80,7 +80,7 @@ class Menu:
 
         listing.append(kodiutils.TitleItem(
             title=kodiutils.localize(30005),  # Shorties
-            path=kodiutils.url_for('show_recommendations', module=module, storefront=STOREFRONT_SHORTIES, module=module),
+            path=kodiutils.url_for('show_recommendations', module=module, storefront=STOREFRONT_SHORTIES),
             art_dict=dict(
                 icon='DefaultTVShows.png',
                 fanart=kodiutils.get_addon_info('fanart'),
@@ -92,13 +92,13 @@ class Menu:
 
         listing.append(kodiutils.TitleItem(
             title=kodiutils.localize(30021),  # Kids
-            path=kodiutils.url_for('show_recommendations', module=module, storefront=STOREFRONT_KIDS, module=module),
+            path=kodiutils.url_for('show_recommendations', module=module, storefront=STOREFRONT_KIDS),
             art_dict=dict(
                 icon='DefaultFavourites.png',
                 fanart=kodiutils.get_addon_info('fanart'),
             ),
             info_dict=dict(
-                plot=kodiutils.localize(30022, service=module),
+                plot=kodiutils.localize(30022,service=module),
             ),
         ))
 
@@ -129,14 +129,14 @@ class Menu:
             ))
 
         listing.append(kodiutils.TitleItem(
-            title=kodiutils.localize(30009),  # Search
+            title=kodiutils.localize(30009,service=module),  # Search
             path=kodiutils.url_for('show_search', module=module),
             art_dict=dict(
                 icon='DefaultAddonsSearch.png',
                 fanart=kodiutils.get_addon_info('fanart'),
             ),
             info_dict=dict(
-                plot=kodiutils.localize(30010, service=module),
+                plot=kodiutils.localize(30010,service=module),
             ),
         ))
 
@@ -220,7 +220,7 @@ class Menu:
                 context_menu = [(
                     kodiutils.localize(30101),  # Remove from My List
                     'Container.Update(%s)' %
-                    kodiutils.url_for('mylist_del', content_id=item.movie_id)
+                    kodiutils.url_for('mylist_del', module=self._module, content_id=item.movie_id)
                 )]
             else:
                 context_menu = [(
