@@ -6,6 +6,7 @@ from __future__ import absolute_import, division, unicode_literals
 import logging
 
 import routing
+import xbmc
 
 from resources.lib import kodilogging, kodiutils
 from resources.lib.vtmgo.vtmgoauth import VtmGoAuth
@@ -48,6 +49,7 @@ def show_RTL():
 @routing.route('/menu')
 def show_main_menu(module):
     """ Show the main menu """
+    xbmc.log('main'+module,xbmc.LOGINFO)
     from resources.lib.modules.menu import Menu
     Menu().show_mainmenu(module)
 
@@ -76,6 +78,7 @@ def auth_clear_cache():
 @routing.route('/channels')
 def show_channels():
     """ Shows Live TV channels """
+    xbmc.log('chanel '+module,xbmc.LOGINFO)
     from resources.lib.modules.channels import Channels
     Channels(module).show_channels(module)
 
