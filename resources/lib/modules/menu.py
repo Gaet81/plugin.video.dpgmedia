@@ -139,7 +139,7 @@ class Menu:
             ),
         ))
 
-        kodiutils.show_listing(listing, sort=['unsorted'], module=module)
+        kodiutils.show_listing(listing, sort=['unsorted'])
 
     @staticmethod
     def format_plot(obj):
