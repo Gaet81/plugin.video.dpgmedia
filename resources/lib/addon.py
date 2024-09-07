@@ -53,7 +53,7 @@ def show_main_menu(module):
     Menu(module).show_mainmenu(module)
 
 
-@routing.route('/auth/login')
+@routing.route('/auth/login/<module>')
 def show_login_menu(module):
     """ Show the login menu """
     from resources.lib.modules.authentication import Authentication
@@ -131,7 +131,7 @@ def show_recommendations(module,storefront):
 
 
 @routing.route('/catalog/recommendations/<module>/<storefront>/<category>')
-def show_recommendations_category(storefront, category):
+def show_recommendations_category(module, storefront, category):
     """ Show the items in a recommendations category """
     from resources.lib.modules.catalog import Catalog
     Catalog(module).show_recommendations_category(storefront, category)
