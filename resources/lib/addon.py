@@ -46,11 +46,11 @@ def show_RTL():
     else:
         show_login_menu(module)
     
-@routing.route('/menu')
+@routing.route('/menu/<module>')
 def show_main_menu(module):
     """ Show the main menu """
     from resources.lib.modules.menu import Menu
-    Menu().show_mainmenu(module)
+    Menu(module).show_mainmenu(module)
 
 
 @routing.route('/auth/login')
@@ -103,66 +103,66 @@ def show_tvguide_detail(channel=None, date=None):
     from resources.lib.modules.tvguide import TvGuide
     TvGuide().show_tvguide_detail(channel, date)
 
-@routing.route('/catalog/detail/<item>')
-def show_detail(item):
+@routing.route('/catalog/detail/<module>/<item>')
+def show_detail(module,item):
     """ Show a program from the catalog """
     from resources.lib.modules.catalog import Catalog
-    Catalog().show_detail(item)
+    Catalog(module).show_detail(item)
 
-@routing.route('/catalog/program/<program>')
-def show_catalog_program(program):
+@routing.route('/catalog/program/<module>/<program>')
+def show_catalog_program(module,program):
     """ Show a program from the catalog """
     from resources.lib.modules.catalog import Catalog
-    Catalog().show_program(program)
+    Catalog(module).show_program(program)
 
 
-@routing.route('/program/program/<program>/<season>')
-def show_catalog_program_season(program, season):
+@routing.route('/program/program/<module>/<program>/<season>')
+def show_catalog_program_season(module, program, season):
     """ Show a program from the catalog """
     from resources.lib.modules.catalog import Catalog
-    Catalog().show_program_season(program, int(season))
+    Catalog(module).show_program_season(program, int(season))
 
 
-@routing.route('/catalog/recommendations/<storefront>')
-def show_recommendations(storefront):
+@routing.route('/catalog/recommendations/<module>/<storefront>')
+def show_recommendations(module,storefront):
     """ Shows the recommendations of a storefront """
     from resources.lib.modules.catalog import Catalog
-    Catalog().show_recommendations(storefront)
+    Catalog(module).show_recommendations(storefront)
 
 
-@routing.route('/catalog/recommendations/<storefront>/<category>')
+@routing.route('/catalog/recommendations/<module>/<storefront>/<category>')
 def show_recommendations_category(storefront, category):
     """ Show the items in a recommendations category """
     from resources.lib.modules.catalog import Catalog
-    Catalog().show_recommendations_category(storefront, category)
+    Catalog(module).show_recommendations_category(storefront, category)
 
 
-@routing.route('/catalog/mylist')
-def show_mylist():
+@routing.route('/catalog/mylist/<module>')
+def show_mylist(module):
     """ Show the items in "My List" """
     from resources.lib.modules.catalog import Catalog
-    Catalog().show_mylist()
+    Catalog(module).show_mylist()
 
 
-@routing.route('/catalog/mylist/add/<content_id>')
-def mylist_add(content_id):
+@routing.route('/catalog/mylist/add/<module>/<content_id>')
+def mylist_add(module, content_id):
     """ Add an item to "My List" """
     from resources.lib.modules.catalog import Catalog
-    Catalog().mylist_add(content_id)
+    Catalog(module).mylist_add(content_id)
 
 
-@routing.route('/catalog/mylist/del/<content_id>')
-def mylist_del(content_id):
+@routing.route('/catalog/mylist/del/<module>/<content_id>')
+def mylist_del(module, content_id):
     """ Remove an item from "My List" """
     from resources.lib.modules.catalog import Catalog
-    Catalog().mylist_del(content_id)
+    Catalog(module).mylist_del(content_id)
 
 
-@routing.route('/catalog/continuewatching')
-def show_continuewatching():
+@routing.route('/catalog/continuewatching/<module>')
+def show_continuewatching(module):
     """ Show the items in "Continue Watching" """
     from resources.lib.modules.catalog import Catalog
-    Catalog().show_continuewatching()
+    Catalog(module).show_continuewatching()
 
 
 @routing.route('/search')
