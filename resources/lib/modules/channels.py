@@ -52,7 +52,7 @@ class Channels:
                 ))
 
             if channel.epg:
-                label = title + '[COLOR gray] | {title} ({start} - {end})[/COLOR]'.format(
+                label = title + '[COLOR black] | {title} ({start} - {end})[/COLOR]'.format(
                     title=channel.epg[0].title,
                     start=channel.epg[0].start.strftime('%H:%M'),
                     end=channel.epg[0].end.strftime('%H:%M'))
@@ -100,7 +100,7 @@ class Channels:
 
         label = kodiutils.localize(30052, channel=title)  # Watch live {channel}
         if channel.epg:
-            label = label + '[COLOR gray] | {title} ({start} - {end})[/COLOR]'.format(
+            label = label + '[COLOR black] | {title} ({start} - {end})[/COLOR]'.format(
                 title=channel.epg[0].title,
                 start=channel.epg[0].start.strftime('%H:%M'),
                 end=channel.epg[0].end.strftime('%H:%M'))
