@@ -74,7 +74,7 @@ def auth_clear_cache():
 
 
 @routing.route('/channels')
-def show_channels(module):
+def show_channels():
     """ Shows Live TV channels """
     from resources.lib.modules.channels import Channels
     Channels(module).show_channels(module)
