@@ -17,15 +17,15 @@ _LOGGER = logging.getLogger(__name__)
 class Channels:
     """ Menu code related to channels """
 
-    def __init__(self):
+    def __init__(self,module):
         """ Initialise object """
         auth = VtmGoAuth(kodiutils.get_tokens_path())
-        self._api = VtmGo(auth.get_tokens())
+        self._api = VtmGo(auth.get_tokens(module))
 
-    def show_channels(self):
+    def show_channels(self,module):
         """ Shows TV channels """
         # Fetch EPG from API
-        channels = self._api.get_live_channels()
+        channels = self._api.get_live_channels(module)
 
         listing = []
         for channel in channels:
