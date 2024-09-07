@@ -42,7 +42,7 @@ class VtmGo:
         """ Return the mode that should be used for API calls """
         if module == 'VTM_GO':
             return 'vtmgo-kids' if self.get_product() == 'VTM_GO_KIDS' else 'VTM_GO'
-        else
+        else:
             return 'rtlplay-kids' if self.get_product() == 'RTL_PLAY_KIDS' else 'RTL_PLAY'
 
     @staticmethod
