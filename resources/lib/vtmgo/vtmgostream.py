@@ -9,6 +9,8 @@ import os
 import random
 from datetime import timedelta
 
+import xbmc
+
 from resources.lib import kodiutils
 from resources.lib.vtmgo import API_ENDPOINT, ResolvedStream, util
 
@@ -151,6 +153,7 @@ class VtmGoStream:
             url = API_ENDPOINT + '/%s/play/%s' % (self._mode(), stream_id)
 
         _LOGGER.debug('Getting stream tokens from %s', url)
+        xbmc.log('token '+self._tokens.access_token+' profile self._tokens.profile'+,xbmc.LOGINFO)
         response = util.http_get(url, token=self._tokens.access_token, profile=self._tokens.profile)
 
         return json.loads(response.text)
