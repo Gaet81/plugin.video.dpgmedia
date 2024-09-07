@@ -45,7 +45,7 @@ class PlayerMonitor(Player):
     def onPlayBackStarted(self):  # pylint: disable=invalid-name
         """ Will be called when Kodi player starts """
         self.__path = getInfoLabel('Player.FilenameAndPath')
-        if not self.__path.startswith('plugin://plugin.video.vtm.go/'):
+        if not self.__path.startswith('plugin://plugin.video.dpgmedia/'):
             self.__listen = False
             return
         self.__listen = True
