@@ -111,7 +111,7 @@ class VtmGoAuth:
 
         return auth_info
         
-    def authorize_check(self):
+    def authorize_check(self,module):
         """ Check if the authorization has been completed. """
         if not self._account.device_code:
             raise NoLoginException
