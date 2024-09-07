@@ -189,6 +189,7 @@ class VtmGoAuth:
         """ Returns the available profiles """
         response = util.http_get(API_ENDPOINT + '/' + module + '/profiles', token=self._account.access_token)
         result = json.loads(response.text)
+        xbmc.log('profile'+response.text,xbmc.LOGINFO)
 
         profiles = [
             Profile(
