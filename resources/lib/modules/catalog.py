@@ -19,10 +19,11 @@ _LOGGER = logging.getLogger(__name__)
 class Catalog:
     """ Menu code related to the catalog """
 
-    def __init__(self):
+    def __init__(self,module):
         """ Initialise object """
         auth = VtmGoAuth(kodiutils.get_tokens_path())
-        self._api = VtmGo(auth.get_tokens())
+        self._api = VtmGo(auth.get_tokens(module))
+        self._module = module
 
     def show_detail(self, detail):
         """ Show a detail from the catalog
@@ -52,7 +53,7 @@ class Catalog:
             if kodiutils.get_global_setting('videolibrary.showallitems') is True:
                 listing.append(kodiutils.TitleItem(
                     title='* %s' % kodiutils.localize(30204),  # * All seasons
-                    path=kodiutils.url_for('show_catalog_program_season', program=program, season=-1),
+                    path=kodiutils.url_for('show_catalog_program_season', module=self._module, program=program, season=-1),
                     art_dict=dict(
                         poster=program_obj.poster,
                         thumb=program_obj.thumb,
@@ -74,7 +75,7 @@ class Catalog:
             for season in list(program_obj.seasons.values()):
                 listing.append(kodiutils.TitleItem(
                     title=kodiutils.localize(30205, season=season.number),  # Season {season}
-                    path=kodiutils.url_for('show_catalog_program_season', program=program, season=season.number),
+                    path=kodiutils.url_for('show_catalog_program_season', module=self._module, program=program, season=season.number),
                     art_dict=dict(
                         poster=program_obj.poster,
                         thumb=program_obj.thumb,
@@ -126,7 +127,7 @@ class Catalog:
         if kodiutils.get_global_setting('videolibrary.showallitems') is True:
             listing.append(kodiutils.TitleItem(
                 title='* %s' % kodiutils.localize(30204),  # * All seasons
-                path=kodiutils.url_for('show_catalog_program_season', program=program, season=-1),
+                path=kodiutils.url_for('show_catalog_program_season', module=self._module, program=program, season=-1),
                 art_dict=dict(
                     poster=program_obj.poster,
                     thumb=program_obj.thumb,
@@ -148,7 +149,7 @@ class Catalog:
         for season in list(program_obj.seasons.values()):
             listing.append(kodiutils.TitleItem(
                 title=kodiutils.localize(30205, season=season.number),  # Season {season}
-                path=kodiutils.url_for('show_catalog_program_season', program=program, season=season.number),
+                path=kodiutils.url_for('show_catalog_program_season', module=self._module, program=program, season=season.number),
                 art_dict=dict(
                     poster=program_obj.poster,
                     thumb=program_obj.thumb,
