@@ -19,11 +19,11 @@ _LOGGER = logging.getLogger(__name__)
 class IPTVManager:
     """ Code related to the Kodi PVR integration """
 
-    def __init__(self, port):
+    def __init__(self, module, port):
         """ Initialise object
         :type port: int
         """
-        self._vtm_go = VtmGo(None)
+        self._vtm_go = VtmGo(module, None)
         self._vtm_go_epg = VtmGoEpg()
         self.port = port
 
