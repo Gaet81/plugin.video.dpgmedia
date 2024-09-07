@@ -178,7 +178,7 @@ class VtmGoAuth:
         self._account.access_token = json.loads(response.text).get('lfvpToken')
 
         # We always use the main profile
-        profiles = self.get_profiles()
+        profiles = self.get_profiles(module)
         self._account.profile = profiles[0].key
         self._account.product = profiles[0].product
 
@@ -186,9 +186,9 @@ class VtmGoAuth:
 
         return self._account
 
-    def get_profiles(self):
+    def get_profiles(self,module):
         """ Returns the available profiles """
-        response = util.http_get(API_ENDPOINT + '/VTM_GO/profiles', token=self._account.access_token)
+        response = util.http_get(API_ENDPOINT + '/' + module + '/profiles', token=self._account.access_token)
         result = json.loads(response.text)
 
         profiles = [
