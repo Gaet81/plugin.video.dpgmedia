@@ -21,7 +21,7 @@ class Player:
     def __init__(self, module):
         """ Initialise object """
         auth = VtmGoAuth(kodiutils.get_tokens_path())
-        self._api = VtmGo(auth.get_tokens(module))
+        self._api = VtmGo(module,auth.get_tokens(module))
         self._stream = VtmGoStream(auth.get_tokens(module),module)
 
     def play_or_live(self, category, item, channel):
