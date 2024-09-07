@@ -26,7 +26,7 @@ def show_module_menu():
     Menu().show_modulemenu()
 
 @routing.route('/vtm')
-def show_VTM(module):
+def show_VTM():
     """ Show the profile selection, or go to the main menu. """
     auth = VtmGoAuth(kodiutils.get_tokens_path())
     if auth.get_tokens('VTM_GO'):
@@ -35,7 +35,7 @@ def show_VTM(module):
         show_login_menu('VTM_GO')
 
 @routing.route('/rtl')
-def show_RTL(module):
+def show_RTL():
     """ Show the profile selection, or go to the main menu. """
     auth = VtmGoAuth(kodiutils.get_tokens_path())
     if auth.get_tokens('rtlplay'):
