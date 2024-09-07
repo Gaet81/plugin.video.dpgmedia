@@ -49,7 +49,6 @@ def show_RTL():
 @routing.route('/menu')
 def show_main_menu(module):
     """ Show the main menu """
-    xbmc.log('main'+module,xbmc.LOGINFO)
     from resources.lib.modules.menu import Menu
     Menu().show_mainmenu(module)
 
@@ -78,6 +77,7 @@ def auth_clear_cache():
 @routing.route('/channels/<module>')
 def show_channels(module):
     """ Shows Live TV channels """
+    xbmc.log('channels'+module,xbmc.LOGINFO)
     from resources.lib.modules.channels import Channels
     Channels(module).show_channels(module)
 
@@ -86,11 +86,12 @@ def show_channels(module):
 def show_channel_menu(module,channel):
     """ Shows Live TV channels """
     from resources.lib.modules.channels import Channels
-    Channels().show_channel_menu(module,channel)
+    xbmc.log('channel menu'+module+' '+channel,xbmc.LOGINFO)
+    Channels(module).show_channel_menu(module,channel)
 
 
 @routing.route('/tvguide/channel/<channel>')
-def show_tvguide_channel(module, channel):
+def show_tvguide_channel(channel):
     """ Shows the dates in the tv guide """
     from resources.lib.modules.tvguide import TvGuide
     TvGuide().show_tvguide_channel(channel)
