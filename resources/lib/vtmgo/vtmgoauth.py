@@ -34,7 +34,6 @@ class AccountStorage:
     refresh_token = ''
     profile = ''
     product = ''
-    module = ''
    
     
     def is_valid_token(self):
