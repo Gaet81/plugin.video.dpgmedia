@@ -38,9 +38,12 @@ class VtmGo:
         """
         self._tokens = tokens
 
-    def _mode(self):
+    def _mode(self,module):
         """ Return the mode that should be used for API calls """
-        return 'vtmgo-kids' if self.get_product() == 'VTM_GO_KIDS' else 'VTM_GO'
+        if module == 'VTM_GO':
+            return 'vtmgo-kids' if self.get_product() == 'VTM_GO_KIDS' else 'VTM_GO'
+        else
+            return 'rtlplay-kids' if self.get_product() == 'RTL_PLAY_KIDS' else 'RTL_PLAY'
 
     @staticmethod
     def get_config():
@@ -159,7 +162,7 @@ class VtmGo:
                          profile=self._tokens.profile)
         kodiutils.set_cache(['swimlane', 'my-list'], None)
 
-    def get_live_channels(self):
+    def get_live_channels(self,module):
         """ Get a list of all the live tv channels.
         :rtype list[LiveChannel]
         """
