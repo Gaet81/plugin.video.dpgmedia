@@ -265,22 +265,6 @@ msgctxt "#30826"
 msgid "Show Continue watching"
 msgstr ""
 
-msgctxt "#30834"
-msgid "Accounts"
-msgstr ""
-
-msgctxt "#30835"
-msgid "Belgian channels"
-msgstr ""
-
-msgctxt "#30836"
-msgid "RTLplay Login"
-msgstr ""
-
-msgctxt "#30837"
-msgid "RTLplay Password"
-msgstr ""
-
 msgctxt "#30840"
 msgid "Playback"
 msgstr ""
