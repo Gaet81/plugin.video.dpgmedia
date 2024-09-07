@@ -99,7 +99,7 @@ class Catalog:
 
         if isinstance(detail_obj, Movie):
             listing = []
-            listing.append(Menu.generate_titleitem(detail_obj))
+            listing.append(Menu.generate_titleitem(detail_obj, module=self._module))
             kodiutils.show_listing(listing, 30017, content='files', sort=['unsorted', 'label', 'year', 'duration'])
             return
 
@@ -189,7 +189,7 @@ class Catalog:
             # Show the season that was selected
             seasons = [program_obj.seasons[season]]
 
-        listing = [Menu.generate_titleitem(e) for s in seasons for e in s.episodes]
+        listing = [Menu.generate_titleitem(e, module=self._module) for s in seasons for e in s.episodes]
 
         # Sort by episode number by default. Takes seasons into account.
         kodiutils.show_listing(listing, program_obj.name, content='episodes', sort=['episode', 'duration'])
@@ -221,7 +221,7 @@ class Catalog:
                     ),
                 ))
             else:
-                listing.append(Menu.generate_titleitem(item))
+                listing.append(Menu.generate_titleitem(item, module=self._module))
 
         if storefront == STOREFRONT_SHORTIES:
             label = 30005  # Shorties
@@ -251,7 +251,7 @@ class Catalog:
 
         listing = []
         for item in result.content:
-            listing.append(Menu.generate_titleitem(item))
+            listing.append(Menu.generate_titleitem(item, module=self._module))
 
         if storefront == STOREFRONT_SHORTIES:
             content = 'tvshows'
@@ -278,7 +278,7 @@ class Catalog:
         listing = []
         for item in mylist:
             item.my_list = True
-            listing.append(Menu.generate_titleitem(item))
+            listing.append(Menu.generate_titleitem(item, module=self._module))
 
         kodiutils.show_listing(listing, 30017, content='files', sort=['unsorted', 'label', 'year', 'duration'])
 
@@ -312,7 +312,7 @@ class Catalog:
 
         listing = []
         for item in category.content:
-            titleitem = Menu.generate_titleitem(item, progress=True)
+            titleitem = Menu.generate_titleitem(item, progress=True, module=self._module)
 
             # Add Program Name to title since this list contains episodes from multiple programs
             title = '%s - %s' % (
