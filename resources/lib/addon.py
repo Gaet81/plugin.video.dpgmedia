@@ -26,28 +26,28 @@ def show_module_menu():
     Menu().show_modulemenu()
 
 @routing.route('/vtm')
-def show_VTM():
+def show_VTM(module):
     """ Show the profile selection, or go to the main menu. """
     auth = VtmGoAuth(kodiutils.get_tokens_path())
     if auth.get_tokens('VTM_GO'):
-        show_main_menu()
+        show_main_menu('VTM_GO')
     else:
         show_login_menu('VTM_GO')
 
 @routing.route('/rtl')
-def show_RTL():
+def show_RTL(module):
     """ Show the profile selection, or go to the main menu. """
     auth = VtmGoAuth(kodiutils.get_tokens_path())
     if auth.get_tokens('rtlplay'):
-        show_main_menu()
+        show_main_menu('rtlplay')
     else:
         show_login_menu('rtlplay')
     
 @routing.route('/menu')
-def show_main_menu():
+def show_main_menu(module):
     """ Show the main menu """
     from resources.lib.modules.menu import Menu
-    Menu().show_mainmenu()
+    Menu().show_mainmenu(module)
 
 
 @routing.route('/auth/login')
