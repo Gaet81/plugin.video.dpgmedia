@@ -50,7 +50,7 @@ class Menu:
                 fanart=kodiutils.get_addon_info('fanart'),
             ),
             info_dict=dict(
-                plot=kodiutils.locatalogcalize(30008),
+                plot=kodiutils.localize(30008),
             ),
         ))
 
