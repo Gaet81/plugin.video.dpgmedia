@@ -61,7 +61,7 @@ class Channels:
 
             listing.append(kodiutils.TitleItem(
                 title=label,
-                path=kodiutils.url_for('show_channel_menu', channel=channel.key),
+                path=kodiutils.url_for('show_channel_menu', module, channel=channel.key),
                 art_dict=dict(
                     icon=icon,
                     thumb=icon,
@@ -83,12 +83,12 @@ class Channels:
 
         kodiutils.show_listing(listing, 30007)
 
-    def show_channel_menu(self, key):
+    def show_channel_menu(self, module, key):
         """ Shows a TV channel
         :type key: str
         """
         # Fetch EPG from API
-        channel = self._api.get_live_channel(key)
+        channel = self._api.get_live_channel(module, key)
         channel_data = CHANNELS.get(channel.key)
 
         fanart = channel.background
