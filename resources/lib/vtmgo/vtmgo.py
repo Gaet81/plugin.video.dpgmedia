@@ -33,15 +33,16 @@ class ApiUpdateRequired(Exception):
 class VtmGo:
     """ VTM GO API """
 
-    def __init__(self, tokens):
+    def __init__(self, module, tokens):
         """ Initialise object
         :param resources.lib.vtmgo.vtmgoauth.AccountStorage token:       An authenticated token.
         """
         self._tokens = tokens
+        self._module = module
 
-    def _mode(self,module):
+    def _mode(self):
         """ Return the mode that should be used for API calls """
-        if module == 'VTM_GO':
+        if self._module == 'VTM_GO':
             return 'vtmgo-kids' if self.get_product() == 'VTM_GO_KIDS' else 'VTM_GO'
         else:
             return 'rtlplay-kids' if self.get_product() == 'RTL_PLAY_KIDS' else 'RTL_PLAY'
@@ -163,12 +164,12 @@ class VtmGo:
                          profile=self._tokens.profile)
         kodiutils.set_cache(['swimlane', 'my-list'], None)
 
-    def get_live_channels(self,module):
+    def get_live_channels(self):
         """ Get a list of all the live tv channels.
         :rtype list[LiveChannel]
         """
         import dateutil.parser
-        response = util.http_get(API_ENDPOINT + '/%s/live' % self._mode(module),
+        response = util.http_get(API_ENDPOINT + '/%s/live' % self._mode(),
                                  token=self._tokens.access_token if self._tokens else None,
                                  profile=self._tokens.profile if self._tokens else None)
         info = json.loads(response.text)
@@ -194,11 +195,11 @@ class VtmGo:
 
         return channels
 
-    def get_live_channel(self, module, key):
+    def get_live_channel(self, key):
         """ Get a the specified live tv channel.
         :rtype LiveChannel
         """
-        channels = self.get_live_channels(module)
+        channels = self.get_live_channels()
         return next(c for c in channels if c.key == key)
 
     def get_detail(self, detail_id, cache=CACHE_AUTO):
