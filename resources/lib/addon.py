@@ -191,7 +191,7 @@ def play_or_live(category, item, channel):
 def play(module, category, item):
     """ Play the requested item """
     from resources.lib.modules.player import Player
-    Player().play(module, category, item)
+    Player(module).play(category, item)
 
 
 @routing.route('/iptv/channels')
