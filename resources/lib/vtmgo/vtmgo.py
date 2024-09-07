@@ -193,11 +193,11 @@ class VtmGo:
 
         return channels
 
-    def get_live_channel(self, key):
+    def get_live_channel(self, module, key):
         """ Get a the specified live tv channel.
         :rtype LiveChannel
         """
-        channels = self.get_live_channels()
+        channels = self.get_live_channels(module)
         return next(c for c in channels if c.key == key)
 
     def get_detail(self, detail_id, cache=CACHE_AUTO):
