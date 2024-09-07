@@ -180,11 +180,11 @@ def play_epg_datetime(channel, timestamp):
     TvGuide().play_epg_datetime(channel, timestamp)
 
 
-@routing.route('/play/catalog/<category>/<item>/<channel>')
-def play_or_live(category, item, channel):
+@routing.route('/play/catalog/<module>/<category>/<item>/<channel>')
+def play_or_live(module, category, item, channel):
     """ Ask to play the requested item or switch to the live channel """
     from resources.lib.modules.player import Player
-    Player().play_or_live(category, item, channel)
+    Player(module).play_or_live(category, item, channel)
 
 
 @routing.route('/play/catalog/<module>/<category>/<item>')
