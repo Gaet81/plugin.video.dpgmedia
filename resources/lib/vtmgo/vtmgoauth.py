@@ -34,6 +34,7 @@ class AccountStorage:
     refresh_token = ''
     profile = ''
     product = ''
+    module = ''
    
     
     def is_valid_token(self):
@@ -105,6 +106,7 @@ class VtmGoAuth:
         auth_info = json.loads(response.text)
         # We only need the device_code
         self._account.device_code = auth_info.get('device_code')
+        self._account.module = module
         self._save_cache()
 
         return auth_info
