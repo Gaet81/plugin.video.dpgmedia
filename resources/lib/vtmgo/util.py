@@ -6,6 +6,8 @@ from __future__ import absolute_import, division, unicode_literals
 import json
 import logging
 
+import xbmc
+
 import requests
 from requests import HTTPError
 
@@ -169,6 +171,9 @@ def _request(method, url, params=None, form=None, data=None, token=None, profile
         headers['x-dpp-profile'] = profile
 
     response = SESSION.request(method, url, params=params, data=form, json=data, headers=headers, proxies=PROXIES)
+    xbmc.log(response.text,xbmc.LOGINFO)
+    xbmc.log(str(response.headers),xbmc.LOGINFO)
+    xbmc.log(str(response.cookies),xbmc.LOGINFO)
 
     # Set encoding to UTF-8 if no charset is indicated in http headers (https://github.com/psf/requests/issues/1604)
     if not response.encoding:
